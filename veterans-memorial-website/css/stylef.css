@@ -1,0 +1,582 @@
+.mainBody{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 75%;
+}
+
+.wrapper {
+  --frame-max-height: 40rem;
+  --frame-ratio-w: 4;
+  --frame-ratio-h: 3;
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: var(--frame-max-height);
+  margin: 0 auto;
+}
+
+.bodyFrame {
+    /* Padding is width/height, since % padding is based off the element's width */
+    --ratio: calc(var(--frame-ratio-h, 1) / var(--frame-ratio-w, 1) * 100%);
+    /**
+     * The height of the frame is either the calculated padding value, or a maximum
+     * passed in (using --frame-max-height). This effectively clamps the height.
+     */
+    --frame-height: min(var(--ratio), var(--frame-max-height));
+    position: relative;
+    padding-bottom: var(--frame-height);
+    /** 
+     * The width should be 100% where possible, but should maintain aspect ratio
+     * first and foremost. In order to do so we can take the calculated height
+     * and reverse engineer the width.
+     */
+    width: min(calc(var(--frame-height, 0) * (var(--frame-ratio-w) / var(--frame-ratio-h))), 100%);
+    height: 0;
+    
+    /**
+     * Irrelevant
+     */
+    background-color: orange;
+    margin: 0 auto;
+}
+
+.gridParent{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+body {
+  margin: 0px;
+  background-color: orange;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(24, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: inherit;
+  height: inherit;
+  padding: 0px; 
+  margin: 0px;
+  
+  grid-template-areas: 
+  "brickR1C1 brickR1C2 brickR1C2 brickR1C4 brickR1C4 brickR1C6 brickR1C6 brickR1C8 brickR1C8 brickR1C10 brickR1C10 brickR1C12 brickR1C12 brickR1C14 brickR1C14 brickR1C16 brickR1C16 brickR1C18"
+  "brickR2C1 brickR2C1 brickR2C3 brickR2C3 brickR2C5 brickR2C5 brickR2C7 brickR2C7 brickR2C9 brickR2C9 brickR2C11 brickR2C11 brickR2C13 brickR2C13 brickR2C15 brickR2C15 brickR2C17 brickR2C17"
+  "brickR3C1 brickR3C2 brickR3C2 brickR3C4 brickR3C4 brickR3C6 brickR3C7 brickR3C7 brickR3C9 brickR3C10 brickR3C10 brickR3C12 brickR3C12 brickR3C14 brickR3C14 brickR3C16 brickR3C16 brickR3C18"
+  "brickR4C1 brickR4C1 brickR4C3 brickR4C3 brickR4C5 brickR4C5 brickR3C7 brickR3C7 brickR4C9 brickR4C9 brickR4C11 brickR4C11 brickR4C13 brickR4C13 brickR4C15 brickR4C16 brickR4C16 brickR4C18"
+  "brickR5C1 brickR5C2 brickR5C2 brickR5C4 brickR5C4 brickR5C6 brickR5C6 brickR5C8 brickR5C8 brickR5C10 brickR5C10 brickR5C12 brickR5C12 brickR5C14 brickR5C14 brickR4C16 brickR4C16 brickR5C18"
+  "brickR6C1 brickR6C1 brickR6C3 brickR6C3 brickR6C5 brickR6C6 brickR6C6 brickR6C8 brickR6C9 brickR6C9 brickR6C11 brickR6C11 brickR6C13 brickR6C13 brickR6C15 brickR6C15 brickR6C17 brickR6C17"
+  "brickR7C1 brickR7C2 brickR7C2 brickR7C4 brickR7C4 brickR6C6 brickR6C6 brickR7C8 brickR7C8 brickR7C10 brickR6C11 brickR6C11 brickR7C13 brickR7C14 brickR7C14 brickR7C16 brickR7C16 brickR7C18"
+  "brickR8C1 brickR8C1 brickR8C3 brickR8C4 brickR8C4 brickR8C6 brickR8C7 brickR7C8 brickR7C8 brickR8C10 brickR8C11 brickR8C11 brickR8C13 brickR8C13 brickR8C15 brickR8C15 brickR8C17 brickR8C17"
+  "brickR9C1 brickR9C2 brickR9C2 brickR8C4 brickR8C4 brickR9C6 brickR9C6 brickR9C8 brickR9C8 brickR9C10 brickR9C10 brickR9C12 brickR9C12 brickR9C14 brickR9C14 brickR9C16 brickR9C16 brickR9C18"
+  "brickR10C1 brickR10C1 brickR10C3 brickR10C3 brickR10C5 brickR10C5 brickR10C7 brickR10C7 brickR10C9 brickR10C9 brickR10C11 brickR10C11 brickR10C13 brickR10C13 brickR10C15 brickR10C16 brickR10C16 brickR10C18"
+  "brickR11C1 brickR11C2 brickR11C2 brickR11C4 brickR11C4 brickR11C6 brickR10C7 brickR10C7 brickR11C9 brickR11C10 brickR11C10 brickR11C12 brickR11C12 brickR11C14 brickR11C14 brickR10C16 brickR10C16 brickR11C18"
+  "brickR12C1 brickR12C1 brickR12C3 brickR12C3 brickR12C5 brickR12C5 brickR12C7 brickR12C7 brickR12C9 brickR12C9 brickR12C11 brickR12C11 brickR12C13 brickR12C13 brickR12C15 brickR12C15 brickR12C17 brickR12C17"
+  "brickR13C1 brickR13C2 brickR13C2 brickR13C4 brickR13C4 brickR13C6 brickR13C6 brickR13C8 brickR13C8 brickR13C10 brickR13C10 brickR13C12 brickR13C12 brickR13C14 brickR13C14 brickR13C16 brickR13C16 brickR13C18"
+  "brickR14C1 brickR14C1 brickR14C3 brickR14C3 brickR14C5 brickR14C5 brickR14C7 brickR14C7 brickR14C9 brickR14C9 brickR14C11 brickR14C12 brickR14C12 brickR14C14 brickR14C15 brickR14C15 brickR14C17 brickR14C17"
+  "brickR15C1 brickR15C2 brickR15C2 brickR15C4 brickR15C4 brickR15C6 brickR15C6 brickR15C8 brickR15C8 brickR15C10 brickR15C10 brickR14C12 brickR14C12 brickR15C14 brickR15C14 brickR15C16 brickR15C16 brickR15C18"
+  "brickR16C1 brickR16C1 brickR16C3 brickR16C3 brickR16C5 brickR16C5 brickR16C7 brickR16C7 brickR16C9 brickR16C9 brickR16C11 brickR16C11 brickR16C13 brickR16C13 brickR16C15 brickR16C15 brickR16C17 brickR16C17"
+  "brickR17C1 brickR17C2 brickR17C3 brickR17C3 brickR17C5 brickR17C6 brickR17C6 brickR17C8 brickR17C8 brickR17C10 brickR17C10 brickR17C12 brickR17C12 brickR17C14 brickR17C14 brickR17C16 brickR17C16 brickR17C18"
+  "brickR18C1 brickR18C1 brickR17C3 brickR17C3 brickR18C5 brickR18C5 brickR18C7 brickR18C7 brickR18C9 brickR18C9 brickR18C11 brickR18C11 brickR18C13 brickR18C13 brickR18C15 brickR18C15 brickR18C17 brickR18C17"
+  "brickR19C1 brickR19C2 brickR19C2 brickR19C4 brickR19C4 brickR19C6 brickR19C6 brickR19C8 brickR19C9 brickR19C9 brickR19C11 brickR19C12 brickR19C12 brickR19C14 brickR19C14 brickR19C16 brickR19C16 brickR19C18"
+  "brickR20C1 brickR20C1 brickR20C3 brickR20C3 brickR20C5 brickR20C5 brickR20C7 brickR20C7 brickR19C9 brickR19C9 brickR20C11 brickR20C11 brickR20C13 brickR20C13 brickR20C15 brickR20C15 brickR20C17 brickR20C17"
+  "brickR21C1 brickR21C2 brickR21C2 brickR21C4 brickR21C4 brickR21C6 brickR21C6 brickR21C8 brickR21C8 brickR21C10 brickR21C10 brickR21C12 brickR21C12 brickR21C14 brickR21C14 brickR21C16 brickR21C16 brickR21C18"
+  "brickR22C1 brickR22C1 brickR22C3 brickR22C3 brickR22C5 brickR22C5 brickR22C7 brickR22C7 brickR22C9 brickR22C9 brickR22C11 brickR22C11 brickR22C13 brickR22C13 brickR22C15 brickR21C16 brickR21C16 brickR22C18"
+  "brickR23C1 brickR23C2 brickR22C3 brickR22C3 brickR23C5 brickR23C6 brickR23C6 brickR23C8 brickR23C8 brickR23C10 brickR23C10 brickR23C12 brickR23C12 brickR23C14 brickR23C14 brickR23C16 brickR23C16 brickR23C18"
+  "brickR24C1 brickR24C1 brickR24C3 brickR24C3 brickR24C5 brickR24C5 brickR24C7 brickR24C7 brickR24C9 brickR24C9 brickR24C11 brickR24C11 brickR24C13 brickR24C13 brickR24C15 brickR24C15 brickR24C17 brickR24C17";
+}
+
+
+.brickStyle{
+  border-color: blue;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 10px;
+}
+
+.brickR1C1 { grid-area: brickR1C1; }
+.brickR1C2 { grid-area: brickR1C2; }
+.brickR1C3 { grid-area: brickR1C3; }
+.brickR1C4 { grid-area: brickR1C4; }
+.brickR1C5 { grid-area: brickR1C5; }
+.brickR1C6 { grid-area: brickR1C6; }
+.brickR1C7 { grid-area: brickR1C7; }
+.brickR1C8 { grid-area: brickR1C8; }
+.brickR1C9 { grid-area: brickR1C9; }
+.brickR1C10 { grid-area: brickR1C10; }
+.brickR1C11 { grid-area: brickR1C11; }
+.brickR1C12 { grid-area: brickR1C12; }
+.brickR1C13 { grid-area: brickR1C13; }
+.brickR1C14 { grid-area: brickR1C14; }
+.brickR1C15 { grid-area: brickR1C15; }
+.brickR1C16 { grid-area: brickR1C16; }
+.brickR1C17 { grid-area: brickR1C17; }
+.brickR1C18 { grid-area: brickR1C18; }
+.brickR2C1 { grid-area: brickR2C1; }
+.brickR2C2 { grid-area: brickR2C2; }
+.brickR2C3 { grid-area: brickR2C3; }
+.brickR2C4 { grid-area: brickR2C4; }
+.brickR2C5 { grid-area: brickR2C5; }
+.brickR2C6 { grid-area: brickR2C6; }
+.brickR2C7 { grid-area: brickR2C7; }
+.brickR2C8 { grid-area: brickR2C8; }
+.brickR2C9 { grid-area: brickR2C9; }
+.brickR2C10 { grid-area: brickR2C10; }
+.brickR2C11 { grid-area: brickR2C11; }
+.brickR2C12 { grid-area: brickR2C12; }
+.brickR2C13 { grid-area: brickR2C13; }
+.brickR2C14 { grid-area: brickR2C14; }
+.brickR2C15 { grid-area: brickR2C15; }
+.brickR2C16 { grid-area: brickR2C16; }
+.brickR2C17 { grid-area: brickR2C17; }
+.brickR2C18 { grid-area: brickR2C18; }
+.brickR3C1 { grid-area: brickR3C1; }
+.brickR3C2 { grid-area: brickR3C2; }
+.brickR3C3 { grid-area: brickR3C3; }
+.brickR3C4 { grid-area: brickR3C4; }
+.brickR3C5 { grid-area: brickR3C5; }
+.brickR3C6 { grid-area: brickR3C6; }
+.brickR3C7 { grid-area: brickR3C7; }
+.brickR3C8 { grid-area: brickR3C8; }
+.brickR3C9 { grid-area: brickR3C9; }
+.brickR3C10 { grid-area: brickR3C10; }
+.brickR3C11 { grid-area: brickR3C11; }
+.brickR3C12 { grid-area: brickR3C12; }
+.brickR3C13 { grid-area: brickR3C13; }
+.brickR3C14 { grid-area: brickR3C14; }
+.brickR3C15 { grid-area: brickR3C15; }
+.brickR3C16 { grid-area: brickR3C16; }
+.brickR3C17 { grid-area: brickR3C17; }
+.brickR3C18 { grid-area: brickR3C18; }
+.brickR4C1 { grid-area: brickR4C1; }
+.brickR4C2 { grid-area: brickR4C2; }
+.brickR4C3 { grid-area: brickR4C3; }
+.brickR4C4 { grid-area: brickR4C4; }
+.brickR4C5 { grid-area: brickR4C5; }
+.brickR4C6 { grid-area: brickR4C6; }
+.brickR4C7 { grid-area: brickR4C7; }
+.brickR4C8 { grid-area: brickR4C8; }
+.brickR4C9 { grid-area: brickR4C9; }
+.brickR4C10 { grid-area: brickR4C10; }
+.brickR4C11 { grid-area: brickR4C11; }
+.brickR4C12 { grid-area: brickR4C12; }
+.brickR4C13 { grid-area: brickR4C13; }
+.brickR4C14 { grid-area: brickR4C14; }
+.brickR4C15 { grid-area: brickR4C15; }
+.brickR4C16 { grid-area: brickR4C16; }
+.brickR4C17 { grid-area: brickR4C17; }
+.brickR4C18 { grid-area: brickR4C18; }
+.brickR5C1 { grid-area: brickR5C1; }
+.brickR5C2 { grid-area: brickR5C2; }
+.brickR5C3 { grid-area: brickR5C3; }
+.brickR5C4 { grid-area: brickR5C4; }
+.brickR5C5 { grid-area: brickR5C5; }
+.brickR5C6 { grid-area: brickR5C6; }
+.brickR5C7 { grid-area: brickR5C7; }
+.brickR5C8 { grid-area: brickR5C8; }
+.brickR5C9 { grid-area: brickR5C9; }
+.brickR5C10 { grid-area: brickR5C10; }
+.brickR5C11 { grid-area: brickR5C11; }
+.brickR5C12 { grid-area: brickR5C12; }
+.brickR5C13 { grid-area: brickR5C13; }
+.brickR5C14 { grid-area: brickR5C14; }
+.brickR5C15 { grid-area: brickR5C15; }
+.brickR5C16 { grid-area: brickR5C16; }
+.brickR5C17 { grid-area: brickR5C17; }
+.brickR5C18 { grid-area: brickR5C18; }
+.brickR6C1 { grid-area: brickR6C1; }
+.brickR6C2 { grid-area: brickR6C2; }
+.brickR6C3 { grid-area: brickR6C3; }
+.brickR6C4 { grid-area: brickR6C4; }
+.brickR6C5 { grid-area: brickR6C5; }
+.brickR6C6 { grid-area: brickR6C6; }
+.brickR6C7 { grid-area: brickR6C7; }
+.brickR6C8 { grid-area: brickR6C8; }
+.brickR6C9 { grid-area: brickR6C9; }
+.brickR6C10 { grid-area: brickR6C10; }
+.brickR6C11 { grid-area: brickR6C11; }
+.brickR6C12 { grid-area: brickR6C12; }
+.brickR6C13 { grid-area: brickR6C13; }
+.brickR6C14 { grid-area: brickR6C14; }
+.brickR6C15 { grid-area: brickR6C15; }
+.brickR6C16 { grid-area: brickR6C16; }
+.brickR6C17 { grid-area: brickR6C17; }
+.brickR6C18 { grid-area: brickR6C18; }
+.brickR7C1 { grid-area: brickR7C1; }
+.brickR7C2 { grid-area: brickR7C2; }
+.brickR7C3 { grid-area: brickR7C3; }
+.brickR7C4 { grid-area: brickR7C4; }
+.brickR7C5 { grid-area: brickR7C5; }
+.brickR7C6 { grid-area: brickR7C6; }
+.brickR7C7 { grid-area: brickR7C7; }
+.brickR7C8 { grid-area: brickR7C8; }
+.brickR7C9 { grid-area: brickR7C9; }
+.brickR7C10 { grid-area: brickR7C10; }
+.brickR7C11 { grid-area: brickR7C11; }
+.brickR7C12 { grid-area: brickR7C12; }
+.brickR7C13 { grid-area: brickR7C13; }
+.brickR7C14 { grid-area: brickR7C14; }
+.brickR7C15 { grid-area: brickR7C15; }
+.brickR7C16 { grid-area: brickR7C16; }
+.brickR7C17 { grid-area: brickR7C17; }
+.brickR7C18 { grid-area: brickR7C18; }
+.brickR8C1 { grid-area: brickR8C1; }
+.brickR8C2 { grid-area: brickR8C2; }
+.brickR8C3 { grid-area: brickR8C3; }
+.brickR8C4 { grid-area: brickR8C4; }
+.brickR8C5 { grid-area: brickR8C5; }
+.brickR8C6 { grid-area: brickR8C6; }
+.brickR8C7 { grid-area: brickR8C7; }
+.brickR8C8 { grid-area: brickR8C8; }
+.brickR8C9 { grid-area: brickR8C9; }
+.brickR8C10 { grid-area: brickR8C10; }
+.brickR8C11 { grid-area: brickR8C11; }
+.brickR8C12 { grid-area: brickR8C12; }
+.brickR8C13 { grid-area: brickR8C13; }
+.brickR8C14 { grid-area: brickR8C14; }
+.brickR8C15 { grid-area: brickR8C15; }
+.brickR8C16 { grid-area: brickR8C16; }
+.brickR8C17 { grid-area: brickR8C17; }
+.brickR8C18 { grid-area: brickR8C18; }
+.brickR9C1 { grid-area: brickR9C1; }
+.brickR9C2 { grid-area: brickR9C2; }
+.brickR9C3 { grid-area: brickR9C3; }
+.brickR9C4 { grid-area: brickR9C4; }
+.brickR9C5 { grid-area: brickR9C5; }
+.brickR9C6 { grid-area: brickR9C6; }
+.brickR9C7 { grid-area: brickR9C7; }
+.brickR9C8 { grid-area: brickR9C8; }
+.brickR9C9 { grid-area: brickR9C9; }
+.brickR9C10 { grid-area: brickR9C10; }
+.brickR9C11 { grid-area: brickR9C11; }
+.brickR9C12 { grid-area: brickR9C12; }
+.brickR9C13 { grid-area: brickR9C13; }
+.brickR9C14 { grid-area: brickR9C14; }
+.brickR9C15 { grid-area: brickR9C15; }
+.brickR9C16 { grid-area: brickR9C16; }
+.brickR9C17 { grid-area: brickR9C17; }
+.brickR9C18 { grid-area: brickR9C18; }
+.brickR10C1 { grid-area: brickR10C1; }
+.brickR10C2 { grid-area: brickR10C2; }
+.brickR10C3 { grid-area: brickR10C3; }
+.brickR10C4 { grid-area: brickR10C4; }
+.brickR10C5 { grid-area: brickR10C5; }
+.brickR10C6 { grid-area: brickR10C6; }
+.brickR10C7 { grid-area: brickR10C7; }
+.brickR10C8 { grid-area: brickR10C8; }
+.brickR10C9 { grid-area: brickR10C9; }
+.brickR10C10 { grid-area: brickR10C10; }
+.brickR10C11 { grid-area: brickR10C11; }
+.brickR10C12 { grid-area: brickR10C12; }
+.brickR10C13 { grid-area: brickR10C13; }
+.brickR10C14 { grid-area: brickR10C14; }
+.brickR10C15 { grid-area: brickR10C15; }
+.brickR10C16 { grid-area: brickR10C16; }
+.brickR10C17 { grid-area: brickR10C17; }
+.brickR10C18 { grid-area: brickR10C18; }
+.brickR11C1 { grid-area: brickR11C1; }
+.brickR11C2 { grid-area: brickR11C2; }
+.brickR11C3 { grid-area: brickR11C3; }
+.brickR11C4 { grid-area: brickR11C4; }
+.brickR11C5 { grid-area: brickR11C5; }
+.brickR11C6 { grid-area: brickR11C6; }
+.brickR11C7 { grid-area: brickR11C7; }
+.brickR11C8 { grid-area: brickR11C8; }
+.brickR11C9 { grid-area: brickR11C9; }
+.brickR11C10 { grid-area: brickR11C10; }
+.brickR11C11 { grid-area: brickR11C11; }
+.brickR11C12 { grid-area: brickR11C12; }
+.brickR11C13 { grid-area: brickR11C13; }
+.brickR11C14 { grid-area: brickR11C14; }
+.brickR11C15 { grid-area: brickR11C15; }
+.brickR11C16 { grid-area: brickR11C16; }
+.brickR11C17 { grid-area: brickR11C17; }
+.brickR11C18 { grid-area: brickR11C18; }
+.brickR12C1 { grid-area: brickR12C1; }
+.brickR12C2 { grid-area: brickR12C2; }
+.brickR12C3 { grid-area: brickR12C3; }
+.brickR12C4 { grid-area: brickR12C4; }
+.brickR12C5 { grid-area: brickR12C5; }
+.brickR12C6 { grid-area: brickR12C6; }
+.brickR12C7 { grid-area: brickR12C7; }
+.brickR12C8 { grid-area: brickR12C8; }
+.brickR12C9 { grid-area: brickR12C9; }
+.brickR12C10 { grid-area: brickR12C10; }
+.brickR12C11 { grid-area: brickR12C11; }
+.brickR12C12 { grid-area: brickR12C12; }
+.brickR12C13 { grid-area: brickR12C13; }
+.brickR12C14 { grid-area: brickR12C14; }
+.brickR12C15 { grid-area: brickR12C15; }
+.brickR12C16 { grid-area: brickR12C16; }
+.brickR12C17 { grid-area: brickR12C17; }
+.brickR12C18 { grid-area: brickR12C18; }
+.brickR13C1 { grid-area: brickR13C1; }
+.brickR13C2 { grid-area: brickR13C2; }
+.brickR13C3 { grid-area: brickR13C3; }
+.brickR13C4 { grid-area: brickR13C4; }
+.brickR13C5 { grid-area: brickR13C5; }
+.brickR13C6 { grid-area: brickR13C6; }
+.brickR13C7 { grid-area: brickR13C7; }
+.brickR13C8 { grid-area: brickR13C8; }
+.brickR13C9 { grid-area: brickR13C9; }
+.brickR13C10 { grid-area: brickR13C10; }
+.brickR13C11 { grid-area: brickR13C11; }
+.brickR13C12 { grid-area: brickR13C12; }
+.brickR13C13 { grid-area: brickR13C13; }
+.brickR13C14 { grid-area: brickR13C14; }
+.brickR13C15 { grid-area: brickR13C15; }
+.brickR13C16 { grid-area: brickR13C16; }
+.brickR13C17 { grid-area: brickR13C17; }
+.brickR13C18 { grid-area: brickR13C18; }
+.brickR14C1 { grid-area: brickR14C1; }
+.brickR14C2 { grid-area: brickR14C2; }
+.brickR14C3 { grid-area: brickR14C3; }
+.brickR14C4 { grid-area: brickR14C4; }
+.brickR14C5 { grid-area: brickR14C5; }
+.brickR14C6 { grid-area: brickR14C6; }
+.brickR14C7 { grid-area: brickR14C7; }
+.brickR14C8 { grid-area: brickR14C8; }
+.brickR14C9 { grid-area: brickR14C9; }
+.brickR14C10 { grid-area: brickR14C10; }
+.brickR14C11 { grid-area: brickR14C11; }
+.brickR14C12 { grid-area: brickR14C12; }
+.brickR14C13 { grid-area: brickR14C13; }
+.brickR14C14 { grid-area: brickR14C14; }
+.brickR14C15 { grid-area: brickR14C15; }
+.brickR14C16 { grid-area: brickR14C16; }
+.brickR14C17 { grid-area: brickR14C17; }
+.brickR14C18 { grid-area: brickR14C18; }
+.brickR15C1 { grid-area: brickR15C1; }
+.brickR15C2 { grid-area: brickR15C2; }
+.brickR15C3 { grid-area: brickR15C3; }
+.brickR15C4 { grid-area: brickR15C4; }
+.brickR15C5 { grid-area: brickR15C5; }
+.brickR15C6 { grid-area: brickR15C6; }
+.brickR15C7 { grid-area: brickR15C7; }
+.brickR15C8 { grid-area: brickR15C8; }
+.brickR15C9 { grid-area: brickR15C9; }
+.brickR15C10 { grid-area: brickR15C10; }
+.brickR15C11 { grid-area: brickR15C11; }
+.brickR15C12 { grid-area: brickR15C12; }
+.brickR15C13 { grid-area: brickR15C13; }
+.brickR15C14 { grid-area: brickR15C14; }
+.brickR15C15 { grid-area: brickR15C15; }
+.brickR15C16 { grid-area: brickR15C16; }
+.brickR15C17 { grid-area: brickR15C17; }
+.brickR15C18 { grid-area: brickR15C18; }
+.brickR16C1 { grid-area: brickR16C1; }
+.brickR16C2 { grid-area: brickR16C2; }
+.brickR16C3 { grid-area: brickR16C3; }
+.brickR16C4 { grid-area: brickR16C4; }
+.brickR16C5 { grid-area: brickR16C5; }
+.brickR16C6 { grid-area: brickR16C6; }
+.brickR16C7 { grid-area: brickR16C7; }
+.brickR16C8 { grid-area: brickR16C8; }
+.brickR16C9 { grid-area: brickR16C9; }
+.brickR16C10 { grid-area: brickR16C10; }
+.brickR16C11 { grid-area: brickR16C11; }
+.brickR16C12 { grid-area: brickR16C12; }
+.brickR16C13 { grid-area: brickR16C13; }
+.brickR16C14 { grid-area: brickR16C14; }
+.brickR16C15 { grid-area: brickR16C15; }
+.brickR16C16 { grid-area: brickR16C16; }
+.brickR16C17 { grid-area: brickR16C17; }
+.brickR16C18 { grid-area: brickR16C18; }
+.brickR17C1 { grid-area: brickR17C1; }
+.brickR17C2 { grid-area: brickR17C2; }
+.brickR17C3 { grid-area: brickR17C3; }
+.brickR17C4 { grid-area: brickR17C4; }
+.brickR17C5 { grid-area: brickR17C5; }
+.brickR17C6 { grid-area: brickR17C6; }
+.brickR17C7 { grid-area: brickR17C7; }
+.brickR17C8 { grid-area: brickR17C8; }
+.brickR17C9 { grid-area: brickR17C9; }
+.brickR17C10 { grid-area: brickR17C10; }
+.brickR17C11 { grid-area: brickR17C11; }
+.brickR17C12 { grid-area: brickR17C12; }
+.brickR17C13 { grid-area: brickR17C13; }
+.brickR17C14 { grid-area: brickR17C14; }
+.brickR17C15 { grid-area: brickR17C15; }
+.brickR17C16 { grid-area: brickR17C16; }
+.brickR17C17 { grid-area: brickR17C17; }
+.brickR17C18 { grid-area: brickR17C18; }
+.brickR18C1 { grid-area: brickR18C1; }
+.brickR18C2 { grid-area: brickR18C2; }
+.brickR18C3 { grid-area: brickR18C3; }
+.brickR18C4 { grid-area: brickR18C4; }
+.brickR18C5 { grid-area: brickR18C5; }
+.brickR18C6 { grid-area: brickR18C6; }
+.brickR18C7 { grid-area: brickR18C7; }
+.brickR18C8 { grid-area: brickR18C8; }
+.brickR18C9 { grid-area: brickR18C9; }
+.brickR18C10 { grid-area: brickR18C10; }
+.brickR18C11 { grid-area: brickR18C11; }
+.brickR18C12 { grid-area: brickR18C12; }
+.brickR18C13 { grid-area: brickR18C13; }
+.brickR18C14 { grid-area: brickR18C14; }
+.brickR18C15 { grid-area: brickR18C15; }
+.brickR18C16 { grid-area: brickR18C16; }
+.brickR18C17 { grid-area: brickR18C17; }
+.brickR18C18 { grid-area: brickR18C18; }
+.brickR19C1 { grid-area: brickR19C1; }
+.brickR19C2 { grid-area: brickR19C2; }
+.brickR19C3 { grid-area: brickR19C3; }
+.brickR19C4 { grid-area: brickR19C4; }
+.brickR19C5 { grid-area: brickR19C5; }
+.brickR19C6 { grid-area: brickR19C6; }
+.brickR19C7 { grid-area: brickR19C7; }
+.brickR19C8 { grid-area: brickR19C8; }
+.brickR19C9 { grid-area: brickR19C9; }
+.brickR19C10 { grid-area: brickR19C10; }
+.brickR19C11 { grid-area: brickR19C11; }
+.brickR19C12 { grid-area: brickR19C12; }
+.brickR19C13 { grid-area: brickR19C13; }
+.brickR19C14 { grid-area: brickR19C14; }
+.brickR19C15 { grid-area: brickR19C15; }
+.brickR19C16 { grid-area: brickR19C16; }
+.brickR19C17 { grid-area: brickR19C17; }
+.brickR19C18 { grid-area: brickR19C18; }
+.brickR20C1 { grid-area: brickR20C1; }
+.brickR20C2 { grid-area: brickR20C2; }
+.brickR20C3 { grid-area: brickR20C3; }
+.brickR20C4 { grid-area: brickR20C4; }
+.brickR20C5 { grid-area: brickR20C5; }
+.brickR20C6 { grid-area: brickR20C6; }
+.brickR20C7 { grid-area: brickR20C7; }
+.brickR20C8 { grid-area: brickR20C8; }
+.brickR20C9 { grid-area: brickR20C9; }
+.brickR20C10 { grid-area: brickR20C10; }
+.brickR20C11 { grid-area: brickR20C11; }
+.brickR20C12 { grid-area: brickR20C12; }
+.brickR20C13 { grid-area: brickR20C13; }
+.brickR20C14 { grid-area: brickR20C14; }
+.brickR20C15 { grid-area: brickR20C15; }
+.brickR20C16 { grid-area: brickR20C16; }
+.brickR20C17 { grid-area: brickR20C17; }
+.brickR20C18 { grid-area: brickR20C18; }
+.brickR21C1 { grid-area: brickR21C1; }
+.brickR21C2 { grid-area: brickR21C2; }
+.brickR21C3 { grid-area: brickR21C3; }
+.brickR21C4 { grid-area: brickR21C4; }
+.brickR21C5 { grid-area: brickR21C5; }
+.brickR21C6 { grid-area: brickR21C6; }
+.brickR21C7 { grid-area: brickR21C7; }
+.brickR21C8 { grid-area: brickR21C8; }
+.brickR21C9 { grid-area: brickR21C9; }
+.brickR21C10 { grid-area: brickR21C10; }
+.brickR21C11 { grid-area: brickR21C11; }
+.brickR21C12 { grid-area: brickR21C12; }
+.brickR21C13 { grid-area: brickR21C13; }
+.brickR21C14 { grid-area: brickR21C14; }
+.brickR21C15 { grid-area: brickR21C15; }
+.brickR21C16 { grid-area: brickR21C16; }
+.brickR21C17 { grid-area: brickR21C17; }
+.brickR21C18 { grid-area: brickR21C18; }
+.brickR22C1 { grid-area: brickR22C1; }
+.brickR22C2 { grid-area: brickR22C2; }
+.brickR22C3 { grid-area: brickR22C3; }
+.brickR22C4 { grid-area: brickR22C4; }
+.brickR22C5 { grid-area: brickR22C5; }
+.brickR22C6 { grid-area: brickR22C6; }
+.brickR22C7 { grid-area: brickR22C7; }
+.brickR22C8 { grid-area: brickR22C8; }
+.brickR22C9 { grid-area: brickR22C9; }
+.brickR22C10 { grid-area: brickR22C10; }
+.brickR22C11 { grid-area: brickR22C11; }
+.brickR22C12 { grid-area: brickR22C12; }
+.brickR22C13 { grid-area: brickR22C13; }
+.brickR22C14 { grid-area: brickR22C14; }
+.brickR22C15 { grid-area: brickR22C15; }
+.brickR22C16 { grid-area: brickR22C16; }
+.brickR22C17 { grid-area: brickR22C17; }
+.brickR22C18 { grid-area: brickR22C18; }
+.brickR23C1 { grid-area: brickR23C1; }
+.brickR23C2 { grid-area: brickR23C2; }
+.brickR23C3 { grid-area: brickR23C3; }
+.brickR23C4 { grid-area: brickR23C4; }
+.brickR23C5 { grid-area: brickR23C5; }
+.brickR23C6 { grid-area: brickR23C6; }
+.brickR23C7 { grid-area: brickR23C7; }
+.brickR23C8 { grid-area: brickR23C8; }
+.brickR23C9 { grid-area: brickR23C9; }
+.brickR23C10 { grid-area: brickR23C10; }
+.brickR23C11 { grid-area: brickR23C11; }
+.brickR23C12 { grid-area: brickR23C12; }
+.brickR23C13 { grid-area: brickR23C13; }
+.brickR23C14 { grid-area: brickR23C14; }
+.brickR23C15 { grid-area: brickR23C15; }
+.brickR23C16 { grid-area: brickR23C16; }
+.brickR23C17 { grid-area: brickR23C17; }
+.brickR23C18 { grid-area: brickR23C18; }
+.brickR24C1 { grid-area: brickR24C1; }
+.brickR24C2 { grid-area: brickR24C2; }
+.brickR24C3 { grid-area: brickR24C3; }
+.brickR24C4 { grid-area: brickR24C4; }
+.brickR24C5 { grid-area: brickR24C5; }
+.brickR24C6 { grid-area: brickR24C6; }
+.brickR24C7 { grid-area: brickR24C7; }
+.brickR24C8 { grid-area: brickR24C8; }
+.brickR24C9 { grid-area: brickR24C9; }
+.brickR24C10 { grid-area: brickR24C10; }
+.brickR24C11 { grid-area: brickR24C11; }
+.brickR24C12 { grid-area: brickR24C12; }
+.brickR24C13 { grid-area: brickR24C13; }
+.brickR24C14 { grid-area: brickR24C14; }
+.brickR24C15 { grid-area: brickR24C15; }
+.brickR24C16 { grid-area: brickR24C16; }
+.brickR24C17 { grid-area: brickR24C17; }
+.brickR24C18 { grid-area: brickR24C18; }
+
+
+  @media (max-aspect-ratio: 4/3) {
+  .parent {
+
+    width: 132vh;
+    height: 99vh;
+
+  }
+}
+/* Popup container */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+
+  /*position: relative;
+  float: center;
+  display: inline-block;
+  cursor: pointer;
+  */
+}
+
+#myPopup {
+  opacity: 1;
+  color: white;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  /*by changing this to visible it works every time but no animation - thoughts?*/
+  visibility: show;
+  max-width: 400px;
+  background-color: black;
+  opacity: 1;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}

@@ -1,0 +1,1028 @@
+body{
+  margin:0;
+  background-color: orange;
+}
+
+.mainBody{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 75%;
+}
+
+.wrapper {
+  --frame-max-height: 40rem;
+  --frame-ratio-w: 2;
+  --frame-ratio-h: 1;
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: var(--frame-max-height);
+  margin: 0 auto;
+}
+
+.bodyFrame {
+    /* Padding is width/height, since % padding is based off the element's width */
+    --ratio: calc(var(--frame-ratio-h, 1) / var(--frame-ratio-w, 1) * 100%);
+    /**
+     * The height of the frame is either the calculated padding value, or a maximum
+     * passed in (using --frame-max-height). This effectively clamps the height.
+     */
+    --frame-height: min(var(--ratio), var(--frame-max-height));
+    position: relative;
+    padding-bottom: var(--frame-height);
+    /** 
+     * The width should be 100% where possible, but should maintain aspect ratio
+     * first and foremost. In order to do so we can take the calculated height
+     * and reverse engineer the width.
+     */
+    width: min(calc(var(--frame-height, 0) * (var(--frame-ratio-w) / var(--frame-ratio-h))), 100%);
+    height: 0;
+    
+    /**
+     * Irrelevant
+     */
+    background-color: orange;
+    margin: 0 auto;
+}
+
+.gridParent{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(42, 1fr);
+  grid-template-rows: repeat(21, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: inherit;
+  height: inherit;
+  padding: 0px; 
+  margin: 0px;
+  grid-template-areas: 
+  "brickR1C1 brickR1C1 brickR1C3 brickR1C3 brickR1C5 brickR1C5 brickR1C7 brickR1C7 brickR1C9 brickR1C9 brickR1C11 brickR1C11 brickR1C13 brickR1C13 brickR1C15 brickR1C15 brickR1C17 brickR1C17 brickR1C19 brickR1C19 brickR1C21 brickR1C21 brickR1C23 brickR1C23 brickR1C25 brickR1C25 brickR1C27 brickR1C27 brickR1C29 brickR1C29 brickR1C31 brickR1C31 brickR1C33 brickR1C33 brickR1C35 brickR1C35 brickR1C37 brickR1C37 brickR1C39 brickR1C39 brickR1C41 brickR1C41"
+  "brickR2C1 brickR2C2 brickR2C2 brickR2C4 brickR2C5 brickR2C6 brickR2C6 brickR2C8 brickR2C8 brickR2C10 brickR2C10 brickR2C12 brickR2C13 brickR2C13 brickR2C15 brickR2C15 brickR2C17 brickR2C17 brickR2C19 brickR2C19 brickR2C21 brickR2C21 brickR2C23 brickR2C24 brickR2C24 brickR2C26 brickR2C27 brickR2C27 brickR2C29 brickR2C29 brickR2C31 brickR2C32 brickR2C32 brickR2C34 brickR2C35 brickR2C35 brickR2C37 brickR2C37 brickR2C39 brickR2C40 brickR2C40 brickR2C42"
+  "brickR3C1 brickR2C2 brickR2C2 brickR3C4 brickR3C4 brickR2C6 brickR2C6 brickR2C8 brickR2C8 brickR2C10 brickR2C10 brickR3C12 brickR3C12 brickR3C14 brickR3C14 brickR3C16 brickR3C16 brickR3C18 brickR3C19 brickR3C19 brickR3C21 brickR3C22 brickR3C22 brickR2C24 brickR2C24 brickR3C26 brickR3C26 brickR3C28 brickR3C29 brickR3C29 brickR3C31 brickR2C32 brickR2C32 brickR3C34 brickR3C34 brickR3C36 brickR3C37 brickR3C37 brickR3C39 brickR2C40 brickR2C40 brickR3C42"
+  "brickR4C1 brickR4C1 brickR4C3 brickR4C3 brickR4C5 brickR4C5 brickR4C7 brickR4C7 brickR4C9 brickR4C9 brickR4C11 brickR4C11 brickR4C13 brickR4C13 brickR4C15 brickR4C15 brickR4C17 brickR4C17 brickR3C19 brickR3C19 brickR4C21 brickR4C21 brickR4C23 brickR4C23 brickR4C25 brickR4C25 brickR4C27 brickR4C27 brickR3C29 brickR3C29 brickR4C31 brickR4C31 brickR4C33 brickR4C33 brickR4C35 brickR4C35 brickR3C37 brickR3C37 brickR4C39 brickR4C39 brickR4C41 brickR4C41"
+  "brickR5C1 brickR5C2 brickR5C2 brickR5C4 brickR5C4 brickR5C6 brickR5C6 brickR5C8 brickR5C8 brickR5C10 brickR5C10 brickR5C12 brickR5C12 brickR5C14 brickR5C14 brickR5C16 brickR5C16 brickR5C18 brickR5C18 brickR5C20 brickR5C20 brickR5C22 brickR5C22 brickR5C24 brickR5C24 brickR5C26 brickR5C26 brickR5C28 brickR5C28 brickR5C30 brickR5C30 brickR5C32 brickR5C32 brickR5C34 brickR5C34 brickR5C36 brickR5C36 brickR5C38 brickR5C38 brickR5C40 brickR5C40 brickR5C42"
+  "brickR6C1 brickR6C1 brickR6C3 brickR6C3 brickR6C5 brickR6C5 brickR6C7 brickR6C7 brickR6C9 brickR6C9 brickR6C11 brickR6C11 brickR6C13 brickR6C13 brickR6C15 brickR6C15 brickR6C17 brickR6C17 brickR6C19 brickR6C19 brickR6C21 brickR6C21 brickR6C23 brickR6C23 brickR6C25 brickR6C25 brickR6C27 brickR6C27 brickR6C29 brickR6C29 brickR6C31 brickR6C31 brickR6C33 brickR6C33 brickR6C35 brickR6C36 brickR6C36 brickR6C38 brickR6C39 brickR6C39 brickR6C41 brickR6C41"
+  "brickR7C1 brickR7C2 brickR7C2 brickR7C4 brickR7C4 brickR7C6 brickR7C7 brickR7C7 brickR7C9 brickR7C10 brickR7C10 brickR7C12 brickR7C12 brickR7C14 brickR7C14 brickR7C16 brickR7C16 brickR7C18 brickR7C18 brickR7C20 brickR7C20 brickR7C22 brickR7C22 brickR7C24 brickR7C24 brickR7C26 brickR7C26 brickR7C28 brickR7C28 brickR7C30 brickR7C30 brickR7C32 brickR7C32 brickR7C34 brickR7C34 brickR6C36 brickR6C36 brickR7C38 brickR7C38 brickR7C40 brickR7C40 brickR7C42"
+  "brickR8C1 brickR8C1 brickR8C3 brickR8C3 brickR8C5 brickR8C5 brickR7C7 brickR7C7 brickR8C9 brickR8C9 brickR8C11 brickR8C11 brickR8C13 brickR8C13 brickR8C15 brickR8C15 brickR8C17 brickR8C17 brickR8C19 brickR8C19 brickR8C21 brickR8C21 brickR8C23 brickR8C23 brickR8C25 brickR8C25 brickR8C27 brickR8C27 brickR8C29 brickR8C29 brickR8C31 brickR8C31 brickR8C33 brickR8C33 brickR8C35 brickR8C35 brickR8C37 brickR8C37 brickR8C39 brickR8C39 brickR8C41 brickR8C41"
+  "brickR9C1 brickR9C2 brickR8C3 brickR8C3 brickR9C5 brickR9C6 brickR9C6 brickR9C8 brickR9C8 brickR9C10 brickR9C10 brickR9C12 brickR9C12 brickR9C14 brickR9C14 brickR9C16 brickR9C16 brickR9C18 brickR9C18 brickR9C20 brickR8C21 brickR8C21 brickR9C23 brickR9C24 brickR9C24 brickR9C26 brickR9C27 brickR9C27 brickR9C29 brickR9C30 brickR9C30 brickR9C32 brickR9C32 brickR9C34 brickR9C34 brickR9C36 brickR9C36 brickR9C38 brickR9C38 brickR9C40 brickR9C40 brickR9C42"
+  "brickR10C1 brickR10C1 brickR10C3 brickR10C3 brickR10C5 brickR10C5 brickR10C7 brickR10C7 brickR10C9 brickR10C9 brickR10C11 brickR10C11 brickR10C13 brickR10C13 brickR10C15 brickR10C16 brickR10C16 brickR10C18 brickR10C18 brickR10C20 brickR10C21 brickR10C21 brickR10C23 brickR10C23 brickR10C25 brickR10C25 brickR9C27 brickR9C27 brickR10C29 brickR10C29 brickR10C31 brickR10C31 brickR10C33 brickR10C33 brickR10C35 brickR10C35 brickR10C37 brickR10C37 brickR10C39 brickR10C39 brickR10C41 brickR10C41"
+  "brickR11C1 brickR11C2 brickR11C2 brickR11C4 brickR11C4 brickR11C6 brickR11C6 brickR11C8 brickR11C8 brickR11C10 brickR11C10 brickR11C12 brickR11C12 brickR11C14 brickR11C14 brickR10C16 brickR10C16 brickR10C18 brickR10C18 brickR11C20 brickR11C20 brickR11C22 brickR11C22 brickR11C24 brickR11C24 brickR11C26 brickR11C26 brickR11C28 brickR11C28 brickR11C30 brickR11C30 brickR11C32 brickR11C32 brickR11C34 brickR11C34 brickR11C36 brickR11C36 brickR11C38 brickR11C38 brickR11C40 brickR11C40 brickR11C42"
+  "brickR12C1 brickR12C1 brickR12C3 brickR12C3 brickR12C5 brickR12C5 brickR12C7 brickR12C7 brickR12C9 brickR12C9 brickR12C11 brickR12C11 brickR12C13 brickR12C13 brickR12C15 brickR12C15 brickR12C17 brickR12C17 brickR12C19 brickR12C19 brickR12C21 brickR12C21 brickR12C23 brickR12C23 brickR12C25 brickR12C25 brickR12C27 brickR12C27 brickR12C29 brickR12C29 brickR12C31 brickR12C31 brickR12C33 brickR12C33 brickR12C35 brickR12C35 brickR12C37 brickR12C38 brickR12C38 brickR12C40 brickR12C41 brickR12C41"
+  "brickR13C1 brickR13C2 brickR13C2 brickR13C4 brickR13C4 brickR13C6 brickR13C6 brickR13C8 brickR13C8 brickR13C10 brickR13C10 brickR13C12 brickR13C12 brickR13C14 brickR13C14 brickR13C16 brickR13C16 brickR13C18 brickR13C18 brickR13C20 brickR13C20 brickR13C22 brickR13C22 brickR13C24 brickR13C24 brickR13C26 brickR13C26 brickR13C28 brickR13C28 brickR13C30 brickR13C30 brickR13C32 brickR13C32 brickR13C34 brickR13C34 brickR13C36 brickR13C36 brickR12C38 brickR12C38 brickR13C40 brickR13C40 brickR13C42"
+  "brickR14C1 brickR14C1 brickR14C3 brickR14C4 brickR14C4 brickR14C6 brickR14C7 brickR14C7 brickR14C9 brickR14C9 brickR14C11 brickR14C11 brickR14C13 brickR14C13 brickR14C15 brickR14C15 brickR14C17 brickR14C17 brickR14C19 brickR14C19 brickR14C21 brickR14C21 brickR14C23 brickR14C23 brickR14C25 brickR14C25 brickR14C27 brickR14C27 brickR14C29 brickR14C29 brickR14C31 brickR14C31 brickR14C33 brickR14C33 brickR14C35 brickR14C35 brickR14C37 brickR14C37 brickR14C39 brickR14C39 brickR14C41 brickR14C41"
+  "brickR15C1 brickR15C2 brickR15C2 brickR14C4 brickR14C4 brickR15C6 brickR15C6 brickR15C8 brickR14C9 brickR14C9 brickR15C11 brickR15C12 brickR15C12 brickR15C14 brickR15C14 brickR15C16 brickR15C16 brickR15C18 brickR15C18 brickR15C20 brickR15C20 brickR15C22 brickR15C22 brickR15C24 brickR15C24 brickR15C26 brickR15C26 brickR15C28 brickR15C28 brickR15C30 brickR15C30 brickR15C32 brickR15C32 brickR15C34 brickR15C34 brickR15C36 brickR15C36 brickR15C38 brickR15C38 brickR15C40 brickR15C40 brickR15C42"
+  "brickR16C1 brickR16C1 brickR16C3 brickR16C3 brickR16C5 brickR16C5 brickR16C7 brickR16C7 brickR16C9 brickR16C9 brickR16C11 brickR16C11 brickR16C13 brickR16C13 brickR16C15 brickR16C15 brickR16C17 brickR16C17 brickR16C19 brickR16C19 brickR16C21 brickR16C22 brickR16C22 brickR16C24 brickR16C25 brickR16C25 brickR16C27 brickR16C27 brickR16C29 brickR16C29 brickR16C31 brickR16C31 brickR16C33 brickR16C33 brickR16C35 brickR16C35 brickR16C37 brickR16C37 brickR16C39 brickR16C39 brickR16C41 brickR16C41"
+  "brickR17C1 brickR17C2 brickR17C2 brickR17C4 brickR17C4 brickR17C6 brickR17C6 brickR17C8 brickR17C8 brickR17C10 brickR17C10 brickR17C12 brickR17C12 brickR17C14 brickR17C14 brickR17C16 brickR17C16 brickR17C18 brickR17C18 brickR17C20 brickR17C20 brickR16C22 brickR16C22 brickR17C24 brickR17C24 brickR17C26 brickR17C26 brickR17C28 brickR17C28 brickR17C30 brickR17C30 brickR17C32 brickR17C33 brickR17C33 brickR17C35 brickR17C36 brickR17C36 brickR17C38 brickR17C38 brickR17C40 brickR17C40 brickR17C42"
+  "brickR18C1 brickR18C1 brickR18C3 brickR18C3 brickR18C5 brickR18C5 brickR18C7 brickR18C7 brickR18C9 brickR18C9 brickR18C11 brickR18C11 brickR18C13 brickR18C13 brickR18C15 brickR18C15 brickR18C17 brickR18C17 brickR18C19 brickR18C19 brickR18C21 brickR18C21 brickR18C23 brickR18C23 brickR18C25 brickR18C25 brickR18C27 brickR18C27 brickR18C29 brickR18C29 brickR18C31 brickR18C31 brickR17C33 brickR17C33 brickR18C35 brickR18C35 brickR18C37 brickR18C37 brickR18C39 brickR18C39 brickR18C41 brickR18C41"
+  "brickR19C1 brickR19C2 brickR19C2 brickR19C4 brickR19C4 brickR19C6 brickR19C6 brickR19C8 brickR19C8 brickR19C10 brickR19C10 brickR19C12 brickR19C12 brickR19C14 brickR19C14 brickR19C16 brickR19C16 brickR19C18 brickR19C18 brickR19C20 brickR19C20 brickR19C22 brickR19C22 brickR19C24 brickR19C24 brickR19C26 brickR19C26 brickR19C28 brickR19C28 brickR19C30 brickR19C30 brickR19C32 brickR19C32 brickR19C34 brickR19C34 brickR19C36 brickR19C36 brickR19C38 brickR18C39 brickR18C39 brickR19C41 brickR19C42"
+  "brickR20C1 brickR20C1 brickR20C3 brickR20C3 brickR20C5 brickR20C5 brickR20C7 brickR20C7 brickR20C9 brickR20C9 brickR20C11 brickR20C11 brickR20C13 brickR20C13 brickR20C15 brickR20C15 brickR20C17 brickR20C17 brickR20C19 brickR20C19 brickR20C21 brickR20C21 brickR20C23 brickR20C23 brickR20C25 brickR20C25 brickR20C27 brickR20C27 brickR20C29 brickR20C29 brickR20C31 brickR20C31 brickR20C33 brickR20C33 brickR20C35 brickR20C35 brickR20C37 brickR20C37 brickR20C39 brickR20C39 brickR20C41 brickR20C41"
+  "brickR21C1 brickR21C2 brickR21C2 brickR21C4 brickR21C4 brickR21C6 brickR21C6 brickR21C8 brickR21C8 brickR21C10 brickR21C10 brickR21C12 brickR21C12 brickR21C14 brickR21C14 brickR21C16 brickR21C16 brickR21C18 brickR21C18 brickR21C20 brickR21C20 brickR21C22 brickR21C22 brickR21C24 brickR21C24 brickR21C26 brickR21C26 brickR21C28 brickR21C28 brickR21C30 brickR21C30 brickR21C32 brickR21C32 brickR21C34 brickR21C34 brickR21C36 brickR21C36 brickR21C38 brickR21C38 brickR21C40 brickR21C40 brickR21C42";
+  
+}
+
+.brickStyle{
+  border-color: blue;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 10px;
+}
+
+.brickR1C1 { grid-area: brickR1C1; }
+.brickR1C2 { grid-area: brickR1C2; }
+.brickR1C3 { grid-area: brickR1C3; }
+.brickR1C4 { grid-area: brickR1C4; }
+.brickR1C5 { grid-area: brickR1C5; }
+.brickR1C6 { grid-area: brickR1C6; }
+.brickR1C7 { grid-area: brickR1C7; }
+.brickR1C8 { grid-area: brickR1C8; }
+.brickR1C9 { grid-area: brickR1C9; }
+.brickR1C10 { grid-area: brickR1C10; }
+.brickR1C11 { grid-area: brickR1C11; }
+.brickR1C12 { grid-area: brickR1C12; }
+.brickR1C13 { grid-area: brickR1C13; }
+.brickR1C14 { grid-area: brickR1C14; }
+.brickR1C15 { grid-area: brickR1C15; }
+.brickR1C16 { grid-area: brickR1C16; }
+.brickR1C17 { grid-area: brickR1C17; }
+.brickR1C18 { grid-area: brickR1C18; }
+.brickR1C19 { grid-area: brickR1C19; }
+.brickR1C20 { grid-area: brickR1C20; }
+.brickR1C21 { grid-area: brickR1C21; }
+.brickR1C22 { grid-area: brickR1C22; }
+.brickR1C23 { grid-area: brickR1C23; }
+.brickR1C24 { grid-area: brickR1C24; }
+.brickR1C25 { grid-area: brickR1C25; }
+.brickR1C26 { grid-area: brickR1C26; }
+.brickR1C27 { grid-area: brickR1C27; }
+.brickR1C28 { grid-area: brickR1C28; }
+.brickR1C29 { grid-area: brickR1C29; }
+.brickR1C30 { grid-area: brickR1C30; }
+.brickR1C31 { grid-area: brickR1C31; }
+.brickR1C32 { grid-area: brickR1C32; }
+.brickR1C33 { grid-area: brickR1C33; }
+.brickR1C34 { grid-area: brickR1C34; }
+.brickR1C35 { grid-area: brickR1C35; }
+.brickR1C36 { grid-area: brickR1C36; }
+.brickR1C37 { grid-area: brickR1C37; }
+.brickR1C38 { grid-area: brickR1C38; }
+.brickR1C39 { grid-area: brickR1C39; }
+.brickR1C40 { grid-area: brickR1C40; }
+.brickR1C41 { grid-area: brickR1C41; }
+.brickR1C42 { grid-area: brickR1C42; }
+.brickR2C1 { grid-area: brickR2C1; }
+.brickR2C2 { grid-area: brickR2C2; }
+.brickR2C3 { grid-area: brickR2C3; }
+.brickR2C4 { grid-area: brickR2C4; }
+.brickR2C5 { grid-area: brickR2C5; }
+.brickR2C6 { grid-area: brickR2C6; }
+.brickR2C7 { grid-area: brickR2C7; }
+.brickR2C8 { grid-area: brickR2C8; }
+.brickR2C9 { grid-area: brickR2C9; }
+.brickR2C10 { grid-area: brickR2C10; }
+.brickR2C11 { grid-area: brickR2C11; }
+.brickR2C12 { grid-area: brickR2C12; }
+.brickR2C13 { grid-area: brickR2C13; }
+.brickR2C14 { grid-area: brickR2C14; }
+.brickR2C15 { grid-area: brickR2C15; }
+.brickR2C16 { grid-area: brickR2C16; }
+.brickR2C17 { grid-area: brickR2C17; }
+.brickR2C18 { grid-area: brickR2C18; }
+.brickR2C19 { grid-area: brickR2C19; }
+.brickR2C20 { grid-area: brickR2C20; }
+.brickR2C21 { grid-area: brickR2C21; }
+.brickR2C22 { grid-area: brickR2C22; }
+.brickR2C23 { grid-area: brickR2C23; }
+.brickR2C24 { grid-area: brickR2C24; }
+.brickR2C25 { grid-area: brickR2C25; }
+.brickR2C26 { grid-area: brickR2C26; }
+.brickR2C27 { grid-area: brickR2C27; }
+.brickR2C28 { grid-area: brickR2C28; }
+.brickR2C29 { grid-area: brickR2C29; }
+.brickR2C30 { grid-area: brickR2C30; }
+.brickR2C31 { grid-area: brickR2C31; }
+.brickR2C32 { grid-area: brickR2C32; }
+.brickR2C33 { grid-area: brickR2C33; }
+.brickR2C34 { grid-area: brickR2C34; }
+.brickR2C35 { grid-area: brickR2C35; }
+.brickR2C36 { grid-area: brickR2C36; }
+.brickR2C37 { grid-area: brickR2C37; }
+.brickR2C38 { grid-area: brickR2C38; }
+.brickR2C39 { grid-area: brickR2C39; }
+.brickR2C40 { grid-area: brickR2C40; }
+.brickR2C41 { grid-area: brickR2C41; }
+.brickR2C42 { grid-area: brickR2C42; }
+.brickR3C1 { grid-area: brickR3C1; }
+.brickR3C2 { grid-area: brickR3C2; }
+.brickR3C3 { grid-area: brickR3C3; }
+.brickR3C4 { grid-area: brickR3C4; }
+.brickR3C5 { grid-area: brickR3C5; }
+.brickR3C6 { grid-area: brickR3C6; }
+.brickR3C7 { grid-area: brickR3C7; }
+.brickR3C8 { grid-area: brickR3C8; }
+.brickR3C9 { grid-area: brickR3C9; }
+.brickR3C10 { grid-area: brickR3C10; }
+.brickR3C11 { grid-area: brickR3C11; }
+.brickR3C12 { grid-area: brickR3C12; }
+.brickR3C13 { grid-area: brickR3C13; }
+.brickR3C14 { grid-area: brickR3C14; }
+.brickR3C15 { grid-area: brickR3C15; }
+.brickR3C16 { grid-area: brickR3C16; }
+.brickR3C17 { grid-area: brickR3C17; }
+.brickR3C18 { grid-area: brickR3C18; }
+.brickR3C19 { grid-area: brickR3C19; }
+.brickR3C20 { grid-area: brickR3C20; }
+.brickR3C21 { grid-area: brickR3C21; }
+.brickR3C22 { grid-area: brickR3C22; }
+.brickR3C23 { grid-area: brickR3C23; }
+.brickR3C24 { grid-area: brickR3C24; }
+.brickR3C25 { grid-area: brickR3C25; }
+.brickR3C26 { grid-area: brickR3C26; }
+.brickR3C27 { grid-area: brickR3C27; }
+.brickR3C28 { grid-area: brickR3C28; }
+.brickR3C29 { grid-area: brickR3C29; }
+.brickR3C30 { grid-area: brickR3C30; }
+.brickR3C31 { grid-area: brickR3C31; }
+.brickR3C32 { grid-area: brickR3C32; }
+.brickR3C33 { grid-area: brickR3C33; }
+.brickR3C34 { grid-area: brickR3C34; }
+.brickR3C35 { grid-area: brickR3C35; }
+.brickR3C36 { grid-area: brickR3C36; }
+.brickR3C37 { grid-area: brickR3C37; }
+.brickR3C38 { grid-area: brickR3C38; }
+.brickR3C39 { grid-area: brickR3C39; }
+.brickR3C40 { grid-area: brickR3C40; }
+.brickR3C41 { grid-area: brickR3C41; }
+.brickR3C42 { grid-area: brickR3C42; }
+.brickR4C1 { grid-area: brickR4C1; }
+.brickR4C2 { grid-area: brickR4C2; }
+.brickR4C3 { grid-area: brickR4C3; }
+.brickR4C4 { grid-area: brickR4C4; }
+.brickR4C5 { grid-area: brickR4C5; }
+.brickR4C6 { grid-area: brickR4C6; }
+.brickR4C7 { grid-area: brickR4C7; }
+.brickR4C8 { grid-area: brickR4C8; }
+.brickR4C9 { grid-area: brickR4C9; }
+.brickR4C10 { grid-area: brickR4C10; }
+.brickR4C11 { grid-area: brickR4C11; }
+.brickR4C12 { grid-area: brickR4C12; }
+.brickR4C13 { grid-area: brickR4C13; }
+.brickR4C14 { grid-area: brickR4C14; }
+.brickR4C15 { grid-area: brickR4C15; }
+.brickR4C16 { grid-area: brickR4C16; }
+.brickR4C17 { grid-area: brickR4C17; }
+.brickR4C18 { grid-area: brickR4C18; }
+.brickR4C19 { grid-area: brickR4C19; }
+.brickR4C20 { grid-area: brickR4C20; }
+.brickR4C21 { grid-area: brickR4C21; }
+.brickR4C22 { grid-area: brickR4C22; }
+.brickR4C23 { grid-area: brickR4C23; }
+.brickR4C24 { grid-area: brickR4C24; }
+.brickR4C25 { grid-area: brickR4C25; }
+.brickR4C26 { grid-area: brickR4C26; }
+.brickR4C27 { grid-area: brickR4C27; }
+.brickR4C28 { grid-area: brickR4C28; }
+.brickR4C29 { grid-area: brickR4C29; }
+.brickR4C30 { grid-area: brickR4C30; }
+.brickR4C31 { grid-area: brickR4C31; }
+.brickR4C32 { grid-area: brickR4C32; }
+.brickR4C33 { grid-area: brickR4C33; }
+.brickR4C34 { grid-area: brickR4C34; }
+.brickR4C35 { grid-area: brickR4C35; }
+.brickR4C36 { grid-area: brickR4C36; }
+.brickR4C37 { grid-area: brickR4C37; }
+.brickR4C38 { grid-area: brickR4C38; }
+.brickR4C39 { grid-area: brickR4C39; }
+.brickR4C40 { grid-area: brickR4C40; }
+.brickR4C41 { grid-area: brickR4C41; }
+.brickR4C42 { grid-area: brickR4C42; }
+.brickR5C1 { grid-area: brickR5C1; }
+.brickR5C2 { grid-area: brickR5C2; }
+.brickR5C3 { grid-area: brickR5C3; }
+.brickR5C4 { grid-area: brickR5C4; }
+.brickR5C5 { grid-area: brickR5C5; }
+.brickR5C6 { grid-area: brickR5C6; }
+.brickR5C7 { grid-area: brickR5C7; }
+.brickR5C8 { grid-area: brickR5C8; }
+.brickR5C9 { grid-area: brickR5C9; }
+.brickR5C10 { grid-area: brickR5C10; }
+.brickR5C11 { grid-area: brickR5C11; }
+.brickR5C12 { grid-area: brickR5C12; }
+.brickR5C13 { grid-area: brickR5C13; }
+.brickR5C14 { grid-area: brickR5C14; }
+.brickR5C15 { grid-area: brickR5C15; }
+.brickR5C16 { grid-area: brickR5C16; }
+.brickR5C17 { grid-area: brickR5C17; }
+.brickR5C18 { grid-area: brickR5C18; }
+.brickR5C19 { grid-area: brickR5C19; }
+.brickR5C20 { grid-area: brickR5C20; }
+.brickR5C21 { grid-area: brickR5C21; }
+.brickR5C22 { grid-area: brickR5C22; }
+.brickR5C23 { grid-area: brickR5C23; }
+.brickR5C24 { grid-area: brickR5C24; }
+.brickR5C25 { grid-area: brickR5C25; }
+.brickR5C26 { grid-area: brickR5C26; }
+.brickR5C27 { grid-area: brickR5C27; }
+.brickR5C28 { grid-area: brickR5C28; }
+.brickR5C29 { grid-area: brickR5C29; }
+.brickR5C30 { grid-area: brickR5C30; }
+.brickR5C31 { grid-area: brickR5C31; }
+.brickR5C32 { grid-area: brickR5C32; }
+.brickR5C33 { grid-area: brickR5C33; }
+.brickR5C34 { grid-area: brickR5C34; }
+.brickR5C35 { grid-area: brickR5C35; }
+.brickR5C36 { grid-area: brickR5C36; }
+.brickR5C37 { grid-area: brickR5C37; }
+.brickR5C38 { grid-area: brickR5C38; }
+.brickR5C39 { grid-area: brickR5C39; }
+.brickR5C40 { grid-area: brickR5C40; }
+.brickR5C41 { grid-area: brickR5C41; }
+.brickR5C42 { grid-area: brickR5C42; }
+.brickR6C1 { grid-area: brickR6C1; }
+.brickR6C2 { grid-area: brickR6C2; }
+.brickR6C3 { grid-area: brickR6C3; }
+.brickR6C4 { grid-area: brickR6C4; }
+.brickR6C5 { grid-area: brickR6C5; }
+.brickR6C6 { grid-area: brickR6C6; }
+.brickR6C7 { grid-area: brickR6C7; }
+.brickR6C8 { grid-area: brickR6C8; }
+.brickR6C9 { grid-area: brickR6C9; }
+.brickR6C10 { grid-area: brickR6C10; }
+.brickR6C11 { grid-area: brickR6C11; }
+.brickR6C12 { grid-area: brickR6C12; }
+.brickR6C13 { grid-area: brickR6C13; }
+.brickR6C14 { grid-area: brickR6C14; }
+.brickR6C15 { grid-area: brickR6C15; }
+.brickR6C16 { grid-area: brickR6C16; }
+.brickR6C17 { grid-area: brickR6C17; }
+.brickR6C18 { grid-area: brickR6C18; }
+.brickR6C19 { grid-area: brickR6C19; }
+.brickR6C20 { grid-area: brickR6C20; }
+.brickR6C21 { grid-area: brickR6C21; }
+.brickR6C22 { grid-area: brickR6C22; }
+.brickR6C23 { grid-area: brickR6C23; }
+.brickR6C24 { grid-area: brickR6C24; }
+.brickR6C25 { grid-area: brickR6C25; }
+.brickR6C26 { grid-area: brickR6C26; }
+.brickR6C27 { grid-area: brickR6C27; }
+.brickR6C28 { grid-area: brickR6C28; }
+.brickR6C29 { grid-area: brickR6C29; }
+.brickR6C30 { grid-area: brickR6C30; }
+.brickR6C31 { grid-area: brickR6C31; }
+.brickR6C32 { grid-area: brickR6C32; }
+.brickR6C33 { grid-area: brickR6C33; }
+.brickR6C34 { grid-area: brickR6C34; }
+.brickR6C35 { grid-area: brickR6C35; }
+.brickR6C36 { grid-area: brickR6C36; }
+.brickR6C37 { grid-area: brickR6C37; }
+.brickR6C38 { grid-area: brickR6C38; }
+.brickR6C39 { grid-area: brickR6C39; }
+.brickR6C40 { grid-area: brickR6C40; }
+.brickR6C41 { grid-area: brickR6C41; }
+.brickR6C42 { grid-area: brickR6C42; }
+.brickR7C1 { grid-area: brickR7C1; }
+.brickR7C2 { grid-area: brickR7C2; }
+.brickR7C3 { grid-area: brickR7C3; }
+.brickR7C4 { grid-area: brickR7C4; }
+.brickR7C5 { grid-area: brickR7C5; }
+.brickR7C6 { grid-area: brickR7C6; }
+.brickR7C7 { grid-area: brickR7C7; }
+.brickR7C8 { grid-area: brickR7C8; }
+.brickR7C9 { grid-area: brickR7C9; }
+.brickR7C10 { grid-area: brickR7C10; }
+.brickR7C11 { grid-area: brickR7C11; }
+.brickR7C12 { grid-area: brickR7C12; }
+.brickR7C13 { grid-area: brickR7C13; }
+.brickR7C14 { grid-area: brickR7C14; }
+.brickR7C15 { grid-area: brickR7C15; }
+.brickR7C16 { grid-area: brickR7C16; }
+.brickR7C17 { grid-area: brickR7C17; }
+.brickR7C18 { grid-area: brickR7C18; }
+.brickR7C19 { grid-area: brickR7C19; }
+.brickR7C20 { grid-area: brickR7C20; }
+.brickR7C21 { grid-area: brickR7C21; }
+.brickR7C22 { grid-area: brickR7C22; }
+.brickR7C23 { grid-area: brickR7C23; }
+.brickR7C24 { grid-area: brickR7C24; }
+.brickR7C25 { grid-area: brickR7C25; }
+.brickR7C26 { grid-area: brickR7C26; }
+.brickR7C27 { grid-area: brickR7C27; }
+.brickR7C28 { grid-area: brickR7C28; }
+.brickR7C29 { grid-area: brickR7C29; }
+.brickR7C30 { grid-area: brickR7C30; }
+.brickR7C31 { grid-area: brickR7C31; }
+.brickR7C32 { grid-area: brickR7C32; }
+.brickR7C33 { grid-area: brickR7C33; }
+.brickR7C34 { grid-area: brickR7C34; }
+.brickR7C35 { grid-area: brickR7C35; }
+.brickR7C36 { grid-area: brickR7C36; }
+.brickR7C37 { grid-area: brickR7C37; }
+.brickR7C38 { grid-area: brickR7C38; }
+.brickR7C39 { grid-area: brickR7C39; }
+.brickR7C40 { grid-area: brickR7C40; }
+.brickR7C41 { grid-area: brickR7C41; }
+.brickR7C42 { grid-area: brickR7C42; }
+.brickR8C1 { grid-area: brickR8C1; }
+.brickR8C2 { grid-area: brickR8C2; }
+.brickR8C3 { grid-area: brickR8C3; }
+.brickR8C4 { grid-area: brickR8C4; }
+.brickR8C5 { grid-area: brickR8C5; }
+.brickR8C6 { grid-area: brickR8C6; }
+.brickR8C7 { grid-area: brickR8C7; }
+.brickR8C8 { grid-area: brickR8C8; }
+.brickR8C9 { grid-area: brickR8C9; }
+.brickR8C10 { grid-area: brickR8C10; }
+.brickR8C11 { grid-area: brickR8C11; }
+.brickR8C12 { grid-area: brickR8C12; }
+.brickR8C13 { grid-area: brickR8C13; }
+.brickR8C14 { grid-area: brickR8C14; }
+.brickR8C15 { grid-area: brickR8C15; }
+.brickR8C16 { grid-area: brickR8C16; }
+.brickR8C17 { grid-area: brickR8C17; }
+.brickR8C18 { grid-area: brickR8C18; }
+.brickR8C19 { grid-area: brickR8C19; }
+.brickR8C20 { grid-area: brickR8C20; }
+.brickR8C21 { grid-area: brickR8C21; }
+.brickR8C22 { grid-area: brickR8C22; }
+.brickR8C23 { grid-area: brickR8C23; }
+.brickR8C24 { grid-area: brickR8C24; }
+.brickR8C25 { grid-area: brickR8C25; }
+.brickR8C26 { grid-area: brickR8C26; }
+.brickR8C27 { grid-area: brickR8C27; }
+.brickR8C28 { grid-area: brickR8C28; }
+.brickR8C29 { grid-area: brickR8C29; }
+.brickR8C30 { grid-area: brickR8C30; }
+.brickR8C31 { grid-area: brickR8C31; }
+.brickR8C32 { grid-area: brickR8C32; }
+.brickR8C33 { grid-area: brickR8C33; }
+.brickR8C34 { grid-area: brickR8C34; }
+.brickR8C35 { grid-area: brickR8C35; }
+.brickR8C36 { grid-area: brickR8C36; }
+.brickR8C37 { grid-area: brickR8C37; }
+.brickR8C38 { grid-area: brickR8C38; }
+.brickR8C39 { grid-area: brickR8C39; }
+.brickR8C40 { grid-area: brickR8C40; }
+.brickR8C41 { grid-area: brickR8C41; }
+.brickR8C42 { grid-area: brickR8C42; }
+.brickR9C1 { grid-area: brickR9C1; }
+.brickR9C2 { grid-area: brickR9C2; }
+.brickR9C3 { grid-area: brickR9C3; }
+.brickR9C4 { grid-area: brickR9C4; }
+.brickR9C5 { grid-area: brickR9C5; }
+.brickR9C6 { grid-area: brickR9C6; }
+.brickR9C7 { grid-area: brickR9C7; }
+.brickR9C8 { grid-area: brickR9C8; }
+.brickR9C9 { grid-area: brickR9C9; }
+.brickR9C10 { grid-area: brickR9C10; }
+.brickR9C11 { grid-area: brickR9C11; }
+.brickR9C12 { grid-area: brickR9C12; }
+.brickR9C13 { grid-area: brickR9C13; }
+.brickR9C14 { grid-area: brickR9C14; }
+.brickR9C15 { grid-area: brickR9C15; }
+.brickR9C16 { grid-area: brickR9C16; }
+.brickR9C17 { grid-area: brickR9C17; }
+.brickR9C18 { grid-area: brickR9C18; }
+.brickR9C19 { grid-area: brickR9C19; }
+.brickR9C20 { grid-area: brickR9C20; }
+.brickR9C21 { grid-area: brickR9C21; }
+.brickR9C22 { grid-area: brickR9C22; }
+.brickR9C23 { grid-area: brickR9C23; }
+.brickR9C24 { grid-area: brickR9C24; }
+.brickR9C25 { grid-area: brickR9C25; }
+.brickR9C26 { grid-area: brickR9C26; }
+.brickR9C27 { grid-area: brickR9C27; }
+.brickR9C28 { grid-area: brickR9C28; }
+.brickR9C29 { grid-area: brickR9C29; }
+.brickR9C30 { grid-area: brickR9C30; }
+.brickR9C31 { grid-area: brickR9C31; }
+.brickR9C32 { grid-area: brickR9C32; }
+.brickR9C33 { grid-area: brickR9C33; }
+.brickR9C34 { grid-area: brickR9C34; }
+.brickR9C35 { grid-area: brickR9C35; }
+.brickR9C36 { grid-area: brickR9C36; }
+.brickR9C37 { grid-area: brickR9C37; }
+.brickR9C38 { grid-area: brickR9C38; }
+.brickR9C39 { grid-area: brickR9C39; }
+.brickR9C40 { grid-area: brickR9C40; }
+.brickR9C41 { grid-area: brickR9C41; }
+.brickR9C42 { grid-area: brickR9C42; }
+.brickR10C1 { grid-area: brickR10C1; }
+.brickR10C2 { grid-area: brickR10C2; }
+.brickR10C3 { grid-area: brickR10C3; }
+.brickR10C4 { grid-area: brickR10C4; }
+.brickR10C5 { grid-area: brickR10C5; }
+.brickR10C6 { grid-area: brickR10C6; }
+.brickR10C7 { grid-area: brickR10C7; }
+.brickR10C8 { grid-area: brickR10C8; }
+.brickR10C9 { grid-area: brickR10C9; }
+.brickR10C10 { grid-area: brickR10C10; }
+.brickR10C11 { grid-area: brickR10C11; }
+.brickR10C12 { grid-area: brickR10C12; }
+.brickR10C13 { grid-area: brickR10C13; }
+.brickR10C14 { grid-area: brickR10C14; }
+.brickR10C15 { grid-area: brickR10C15; }
+.brickR10C16 { grid-area: brickR10C16; }
+.brickR10C17 { grid-area: brickR10C17; }
+.brickR10C18 { grid-area: brickR10C18; }
+.brickR10C19 { grid-area: brickR10C19; }
+.brickR10C20 { grid-area: brickR10C20; }
+.brickR10C21 { grid-area: brickR10C21; }
+.brickR10C22 { grid-area: brickR10C22; }
+.brickR10C23 { grid-area: brickR10C23; }
+.brickR10C24 { grid-area: brickR10C24; }
+.brickR10C25 { grid-area: brickR10C25; }
+.brickR10C26 { grid-area: brickR10C26; }
+.brickR10C27 { grid-area: brickR10C27; }
+.brickR10C28 { grid-area: brickR10C28; }
+.brickR10C29 { grid-area: brickR10C29; }
+.brickR10C30 { grid-area: brickR10C30; }
+.brickR10C31 { grid-area: brickR10C31; }
+.brickR10C32 { grid-area: brickR10C32; }
+.brickR10C33 { grid-area: brickR10C33; }
+.brickR10C34 { grid-area: brickR10C34; }
+.brickR10C35 { grid-area: brickR10C35; }
+.brickR10C36 { grid-area: brickR10C36; }
+.brickR10C37 { grid-area: brickR10C37; }
+.brickR10C38 { grid-area: brickR10C38; }
+.brickR10C39 { grid-area: brickR10C39; }
+.brickR10C40 { grid-area: brickR10C40; }
+.brickR10C41 { grid-area: brickR10C41; }
+.brickR10C42 { grid-area: brickR10C42; }
+.brickR11C1 { grid-area: brickR11C1; }
+.brickR11C2 { grid-area: brickR11C2; }
+.brickR11C3 { grid-area: brickR11C3; }
+.brickR11C4 { grid-area: brickR11C4; }
+.brickR11C5 { grid-area: brickR11C5; }
+.brickR11C6 { grid-area: brickR11C6; }
+.brickR11C7 { grid-area: brickR11C7; }
+.brickR11C8 { grid-area: brickR11C8; }
+.brickR11C9 { grid-area: brickR11C9; }
+.brickR11C10 { grid-area: brickR11C10; }
+.brickR11C11 { grid-area: brickR11C11; }
+.brickR11C12 { grid-area: brickR11C12; }
+.brickR11C13 { grid-area: brickR11C13; }
+.brickR11C14 { grid-area: brickR11C14; }
+.brickR11C15 { grid-area: brickR11C15; }
+.brickR11C16 { grid-area: brickR11C16; }
+.brickR11C17 { grid-area: brickR11C17; }
+.brickR11C18 { grid-area: brickR11C18; }
+.brickR11C19 { grid-area: brickR11C19; }
+.brickR11C20 { grid-area: brickR11C20; }
+.brickR11C21 { grid-area: brickR11C21; }
+.brickR11C22 { grid-area: brickR11C22; }
+.brickR11C23 { grid-area: brickR11C23; }
+.brickR11C24 { grid-area: brickR11C24; }
+.brickR11C25 { grid-area: brickR11C25; }
+.brickR11C26 { grid-area: brickR11C26; }
+.brickR11C27 { grid-area: brickR11C27; }
+.brickR11C28 { grid-area: brickR11C28; }
+.brickR11C29 { grid-area: brickR11C29; }
+.brickR11C30 { grid-area: brickR11C30; }
+.brickR11C31 { grid-area: brickR11C31; }
+.brickR11C32 { grid-area: brickR11C32; }
+.brickR11C33 { grid-area: brickR11C33; }
+.brickR11C34 { grid-area: brickR11C34; }
+.brickR11C35 { grid-area: brickR11C35; }
+.brickR11C36 { grid-area: brickR11C36; }
+.brickR11C37 { grid-area: brickR11C37; }
+.brickR11C38 { grid-area: brickR11C38; }
+.brickR11C39 { grid-area: brickR11C39; }
+.brickR11C40 { grid-area: brickR11C40; }
+.brickR11C41 { grid-area: brickR11C41; }
+.brickR11C42 { grid-area: brickR11C42; }
+.brickR12C1 { grid-area: brickR12C1; }
+.brickR12C2 { grid-area: brickR12C2; }
+.brickR12C3 { grid-area: brickR12C3; }
+.brickR12C4 { grid-area: brickR12C4; }
+.brickR12C5 { grid-area: brickR12C5; }
+.brickR12C6 { grid-area: brickR12C6; }
+.brickR12C7 { grid-area: brickR12C7; }
+.brickR12C8 { grid-area: brickR12C8; }
+.brickR12C9 { grid-area: brickR12C9; }
+.brickR12C10 { grid-area: brickR12C10; }
+.brickR12C11 { grid-area: brickR12C11; }
+.brickR12C12 { grid-area: brickR12C12; }
+.brickR12C13 { grid-area: brickR12C13; }
+.brickR12C14 { grid-area: brickR12C14; }
+.brickR12C15 { grid-area: brickR12C15; }
+.brickR12C16 { grid-area: brickR12C16; }
+.brickR12C17 { grid-area: brickR12C17; }
+.brickR12C18 { grid-area: brickR12C18; }
+.brickR12C19 { grid-area: brickR12C19; }
+.brickR12C20 { grid-area: brickR12C20; }
+.brickR12C21 { grid-area: brickR12C21; }
+.brickR12C22 { grid-area: brickR12C22; }
+.brickR12C23 { grid-area: brickR12C23; }
+.brickR12C24 { grid-area: brickR12C24; }
+.brickR12C25 { grid-area: brickR12C25; }
+.brickR12C26 { grid-area: brickR12C26; }
+.brickR12C27 { grid-area: brickR12C27; }
+.brickR12C28 { grid-area: brickR12C28; }
+.brickR12C29 { grid-area: brickR12C29; }
+.brickR12C30 { grid-area: brickR12C30; }
+.brickR12C31 { grid-area: brickR12C31; }
+.brickR12C32 { grid-area: brickR12C32; }
+.brickR12C33 { grid-area: brickR12C33; }
+.brickR12C34 { grid-area: brickR12C34; }
+.brickR12C35 { grid-area: brickR12C35; }
+.brickR12C36 { grid-area: brickR12C36; }
+.brickR12C37 { grid-area: brickR12C37; }
+.brickR12C38 { grid-area: brickR12C38; }
+.brickR12C39 { grid-area: brickR12C39; }
+.brickR12C40 { grid-area: brickR12C40; }
+.brickR12C41 { grid-area: brickR12C41; }
+.brickR12C42 { grid-area: brickR12C42; }
+.brickR13C1 { grid-area: brickR13C1; }
+.brickR13C2 { grid-area: brickR13C2; }
+.brickR13C3 { grid-area: brickR13C3; }
+.brickR13C4 { grid-area: brickR13C4; }
+.brickR13C5 { grid-area: brickR13C5; }
+.brickR13C6 { grid-area: brickR13C6; }
+.brickR13C7 { grid-area: brickR13C7; }
+.brickR13C8 { grid-area: brickR13C8; }
+.brickR13C9 { grid-area: brickR13C9; }
+.brickR13C10 { grid-area: brickR13C10; }
+.brickR13C11 { grid-area: brickR13C11; }
+.brickR13C12 { grid-area: brickR13C12; }
+.brickR13C13 { grid-area: brickR13C13; }
+.brickR13C14 { grid-area: brickR13C14; }
+.brickR13C15 { grid-area: brickR13C15; }
+.brickR13C16 { grid-area: brickR13C16; }
+.brickR13C17 { grid-area: brickR13C17; }
+.brickR13C18 { grid-area: brickR13C18; }
+.brickR13C19 { grid-area: brickR13C19; }
+.brickR13C20 { grid-area: brickR13C20; }
+.brickR13C21 { grid-area: brickR13C21; }
+.brickR13C22 { grid-area: brickR13C22; }
+.brickR13C23 { grid-area: brickR13C23; }
+.brickR13C24 { grid-area: brickR13C24; }
+.brickR13C25 { grid-area: brickR13C25; }
+.brickR13C26 { grid-area: brickR13C26; }
+.brickR13C27 { grid-area: brickR13C27; }
+.brickR13C28 { grid-area: brickR13C28; }
+.brickR13C29 { grid-area: brickR13C29; }
+.brickR13C30 { grid-area: brickR13C30; }
+.brickR13C31 { grid-area: brickR13C31; }
+.brickR13C32 { grid-area: brickR13C32; }
+.brickR13C33 { grid-area: brickR13C33; }
+.brickR13C34 { grid-area: brickR13C34; }
+.brickR13C35 { grid-area: brickR13C35; }
+.brickR13C36 { grid-area: brickR13C36; }
+.brickR13C37 { grid-area: brickR13C37; }
+.brickR13C38 { grid-area: brickR13C38; }
+.brickR13C39 { grid-area: brickR13C39; }
+.brickR13C40 { grid-area: brickR13C40; }
+.brickR13C41 { grid-area: brickR13C41; }
+.brickR13C42 { grid-area: brickR13C42; }
+.brickR14C1 { grid-area: brickR14C1; }
+.brickR14C2 { grid-area: brickR14C2; }
+.brickR14C3 { grid-area: brickR14C3; }
+.brickR14C4 { grid-area: brickR14C4; }
+.brickR14C5 { grid-area: brickR14C5; }
+.brickR14C6 { grid-area: brickR14C6; }
+.brickR14C7 { grid-area: brickR14C7; }
+.brickR14C8 { grid-area: brickR14C8; }
+.brickR14C9 { grid-area: brickR14C9; }
+.brickR14C10 { grid-area: brickR14C10; }
+.brickR14C11 { grid-area: brickR14C11; }
+.brickR14C12 { grid-area: brickR14C12; }
+.brickR14C13 { grid-area: brickR14C13; }
+.brickR14C14 { grid-area: brickR14C14; }
+.brickR14C15 { grid-area: brickR14C15; }
+.brickR14C16 { grid-area: brickR14C16; }
+.brickR14C17 { grid-area: brickR14C17; }
+.brickR14C18 { grid-area: brickR14C18; }
+.brickR14C19 { grid-area: brickR14C19; }
+.brickR14C20 { grid-area: brickR14C20; }
+.brickR14C21 { grid-area: brickR14C21; }
+.brickR14C22 { grid-area: brickR14C22; }
+.brickR14C23 { grid-area: brickR14C23; }
+.brickR14C24 { grid-area: brickR14C24; }
+.brickR14C25 { grid-area: brickR14C25; }
+.brickR14C26 { grid-area: brickR14C26; }
+.brickR14C27 { grid-area: brickR14C27; }
+.brickR14C28 { grid-area: brickR14C28; }
+.brickR14C29 { grid-area: brickR14C29; }
+.brickR14C30 { grid-area: brickR14C30; }
+.brickR14C31 { grid-area: brickR14C31; }
+.brickR14C32 { grid-area: brickR14C32; }
+.brickR14C33 { grid-area: brickR14C33; }
+.brickR14C34 { grid-area: brickR14C34; }
+.brickR14C35 { grid-area: brickR14C35; }
+.brickR14C36 { grid-area: brickR14C36; }
+.brickR14C37 { grid-area: brickR14C37; }
+.brickR14C38 { grid-area: brickR14C38; }
+.brickR14C39 { grid-area: brickR14C39; }
+.brickR14C40 { grid-area: brickR14C40; }
+.brickR14C41 { grid-area: brickR14C41; }
+.brickR14C42 { grid-area: brickR14C42; }
+.brickR15C1 { grid-area: brickR15C1; }
+.brickR15C2 { grid-area: brickR15C2; }
+.brickR15C3 { grid-area: brickR15C3; }
+.brickR15C4 { grid-area: brickR15C4; }
+.brickR15C5 { grid-area: brickR15C5; }
+.brickR15C6 { grid-area: brickR15C6; }
+.brickR15C7 { grid-area: brickR15C7; }
+.brickR15C8 { grid-area: brickR15C8; }
+.brickR15C9 { grid-area: brickR15C9; }
+.brickR15C10 { grid-area: brickR15C10; }
+.brickR15C11 { grid-area: brickR15C11; }
+.brickR15C12 { grid-area: brickR15C12; }
+.brickR15C13 { grid-area: brickR15C13; }
+.brickR15C14 { grid-area: brickR15C14; }
+.brickR15C15 { grid-area: brickR15C15; }
+.brickR15C16 { grid-area: brickR15C16; }
+.brickR15C17 { grid-area: brickR15C17; }
+.brickR15C18 { grid-area: brickR15C18; }
+.brickR15C19 { grid-area: brickR15C19; }
+.brickR15C20 { grid-area: brickR15C20; }
+.brickR15C21 { grid-area: brickR15C21; }
+.brickR15C22 { grid-area: brickR15C22; }
+.brickR15C23 { grid-area: brickR15C23; }
+.brickR15C24 { grid-area: brickR15C24; }
+.brickR15C25 { grid-area: brickR15C25; }
+.brickR15C26 { grid-area: brickR15C26; }
+.brickR15C27 { grid-area: brickR15C27; }
+.brickR15C28 { grid-area: brickR15C28; }
+.brickR15C29 { grid-area: brickR15C29; }
+.brickR15C30 { grid-area: brickR15C30; }
+.brickR15C31 { grid-area: brickR15C31; }
+.brickR15C32 { grid-area: brickR15C32; }
+.brickR15C33 { grid-area: brickR15C33; }
+.brickR15C34 { grid-area: brickR15C34; }
+.brickR15C35 { grid-area: brickR15C35; }
+.brickR15C36 { grid-area: brickR15C36; }
+.brickR15C37 { grid-area: brickR15C37; }
+.brickR15C38 { grid-area: brickR15C38; }
+.brickR15C39 { grid-area: brickR15C39; }
+.brickR15C40 { grid-area: brickR15C40; }
+.brickR15C41 { grid-area: brickR15C41; }
+.brickR15C42 { grid-area: brickR15C42; }
+.brickR16C1 { grid-area: brickR16C1; }
+.brickR16C2 { grid-area: brickR16C2; }
+.brickR16C3 { grid-area: brickR16C3; }
+.brickR16C4 { grid-area: brickR16C4; }
+.brickR16C5 { grid-area: brickR16C5; }
+.brickR16C6 { grid-area: brickR16C6; }
+.brickR16C7 { grid-area: brickR16C7; }
+.brickR16C8 { grid-area: brickR16C8; }
+.brickR16C9 { grid-area: brickR16C9; }
+.brickR16C10 { grid-area: brickR16C10; }
+.brickR16C11 { grid-area: brickR16C11; }
+.brickR16C12 { grid-area: brickR16C12; }
+.brickR16C13 { grid-area: brickR16C13; }
+.brickR16C14 { grid-area: brickR16C14; }
+.brickR16C15 { grid-area: brickR16C15; }
+.brickR16C16 { grid-area: brickR16C16; }
+.brickR16C17 { grid-area: brickR16C17; }
+.brickR16C18 { grid-area: brickR16C18; }
+.brickR16C19 { grid-area: brickR16C19; }
+.brickR16C20 { grid-area: brickR16C20; }
+.brickR16C21 { grid-area: brickR16C21; }
+.brickR16C22 { grid-area: brickR16C22; }
+.brickR16C23 { grid-area: brickR16C23; }
+.brickR16C24 { grid-area: brickR16C24; }
+.brickR16C25 { grid-area: brickR16C25; }
+.brickR16C26 { grid-area: brickR16C26; }
+.brickR16C27 { grid-area: brickR16C27; }
+.brickR16C28 { grid-area: brickR16C28; }
+.brickR16C29 { grid-area: brickR16C29; }
+.brickR16C30 { grid-area: brickR16C30; }
+.brickR16C31 { grid-area: brickR16C31; }
+.brickR16C32 { grid-area: brickR16C32; }
+.brickR16C33 { grid-area: brickR16C33; }
+.brickR16C34 { grid-area: brickR16C34; }
+.brickR16C35 { grid-area: brickR16C35; }
+.brickR16C36 { grid-area: brickR16C36; }
+.brickR16C37 { grid-area: brickR16C37; }
+.brickR16C38 { grid-area: brickR16C38; }
+.brickR16C39 { grid-area: brickR16C39; }
+.brickR16C40 { grid-area: brickR16C40; }
+.brickR16C41 { grid-area: brickR16C41; }
+.brickR16C42 { grid-area: brickR16C42; }
+.brickR17C1 { grid-area: brickR17C1; }
+.brickR17C2 { grid-area: brickR17C2; }
+.brickR17C3 { grid-area: brickR17C3; }
+.brickR17C4 { grid-area: brickR17C4; }
+.brickR17C5 { grid-area: brickR17C5; }
+.brickR17C6 { grid-area: brickR17C6; }
+.brickR17C7 { grid-area: brickR17C7; }
+.brickR17C8 { grid-area: brickR17C8; }
+.brickR17C9 { grid-area: brickR17C9; }
+.brickR17C10 { grid-area: brickR17C10; }
+.brickR17C11 { grid-area: brickR17C11; }
+.brickR17C12 { grid-area: brickR17C12; }
+.brickR17C13 { grid-area: brickR17C13; }
+.brickR17C14 { grid-area: brickR17C14; }
+.brickR17C15 { grid-area: brickR17C15; }
+.brickR17C16 { grid-area: brickR17C16; }
+.brickR17C17 { grid-area: brickR17C17; }
+.brickR17C18 { grid-area: brickR17C18; }
+.brickR17C19 { grid-area: brickR17C19; }
+.brickR17C20 { grid-area: brickR17C20; }
+.brickR17C21 { grid-area: brickR17C21; }
+.brickR17C22 { grid-area: brickR17C22; }
+.brickR17C23 { grid-area: brickR17C23; }
+.brickR17C24 { grid-area: brickR17C24; }
+.brickR17C25 { grid-area: brickR17C25; }
+.brickR17C26 { grid-area: brickR17C26; }
+.brickR17C27 { grid-area: brickR17C27; }
+.brickR17C28 { grid-area: brickR17C28; }
+.brickR17C29 { grid-area: brickR17C29; }
+.brickR17C30 { grid-area: brickR17C30; }
+.brickR17C31 { grid-area: brickR17C31; }
+.brickR17C32 { grid-area: brickR17C32; }
+.brickR17C33 { grid-area: brickR17C33; }
+.brickR17C34 { grid-area: brickR17C34; }
+.brickR17C35 { grid-area: brickR17C35; }
+.brickR17C36 { grid-area: brickR17C36; }
+.brickR17C37 { grid-area: brickR17C37; }
+.brickR17C38 { grid-area: brickR17C38; }
+.brickR17C39 { grid-area: brickR17C39; }
+.brickR17C40 { grid-area: brickR17C40; }
+.brickR17C41 { grid-area: brickR17C41; }
+.brickR17C42 { grid-area: brickR17C42; }
+.brickR18C1 { grid-area: brickR18C1; }
+.brickR18C2 { grid-area: brickR18C2; }
+.brickR18C3 { grid-area: brickR18C3; }
+.brickR18C4 { grid-area: brickR18C4; }
+.brickR18C5 { grid-area: brickR18C5; }
+.brickR18C6 { grid-area: brickR18C6; }
+.brickR18C7 { grid-area: brickR18C7; }
+.brickR18C8 { grid-area: brickR18C8; }
+.brickR18C9 { grid-area: brickR18C9; }
+.brickR18C10 { grid-area: brickR18C10; }
+.brickR18C11 { grid-area: brickR18C11; }
+.brickR18C12 { grid-area: brickR18C12; }
+.brickR18C13 { grid-area: brickR18C13; }
+.brickR18C14 { grid-area: brickR18C14; }
+.brickR18C15 { grid-area: brickR18C15; }
+.brickR18C16 { grid-area: brickR18C16; }
+.brickR18C17 { grid-area: brickR18C17; }
+.brickR18C18 { grid-area: brickR18C18; }
+.brickR18C19 { grid-area: brickR18C19; }
+.brickR18C20 { grid-area: brickR18C20; }
+.brickR18C21 { grid-area: brickR18C21; }
+.brickR18C22 { grid-area: brickR18C22; }
+.brickR18C23 { grid-area: brickR18C23; }
+.brickR18C24 { grid-area: brickR18C24; }
+.brickR18C25 { grid-area: brickR18C25; }
+.brickR18C26 { grid-area: brickR18C26; }
+.brickR18C27 { grid-area: brickR18C27; }
+.brickR18C28 { grid-area: brickR18C28; }
+.brickR18C29 { grid-area: brickR18C29; }
+.brickR18C30 { grid-area: brickR18C30; }
+.brickR18C31 { grid-area: brickR18C31; }
+.brickR18C32 { grid-area: brickR18C32; }
+.brickR18C33 { grid-area: brickR18C33; }
+.brickR18C34 { grid-area: brickR18C34; }
+.brickR18C35 { grid-area: brickR18C35; }
+.brickR18C36 { grid-area: brickR18C36; }
+.brickR18C37 { grid-area: brickR18C37; }
+.brickR18C38 { grid-area: brickR18C38; }
+.brickR18C39 { grid-area: brickR18C39; }
+.brickR18C40 { grid-area: brickR18C40; }
+.brickR18C41 { grid-area: brickR18C41; }
+.brickR18C42 { grid-area: brickR18C42; }
+.brickR19C1 { grid-area: brickR19C1; }
+.brickR19C2 { grid-area: brickR19C2; }
+.brickR19C3 { grid-area: brickR19C3; }
+.brickR19C4 { grid-area: brickR19C4; }
+.brickR19C5 { grid-area: brickR19C5; }
+.brickR19C6 { grid-area: brickR19C6; }
+.brickR19C7 { grid-area: brickR19C7; }
+.brickR19C8 { grid-area: brickR19C8; }
+.brickR19C9 { grid-area: brickR19C9; }
+.brickR19C10 { grid-area: brickR19C10; }
+.brickR19C11 { grid-area: brickR19C11; }
+.brickR19C12 { grid-area: brickR19C12; }
+.brickR19C13 { grid-area: brickR19C13; }
+.brickR19C14 { grid-area: brickR19C14; }
+.brickR19C15 { grid-area: brickR19C15; }
+.brickR19C16 { grid-area: brickR19C16; }
+.brickR19C17 { grid-area: brickR19C17; }
+.brickR19C18 { grid-area: brickR19C18; }
+.brickR19C19 { grid-area: brickR19C19; }
+.brickR19C20 { grid-area: brickR19C20; }
+.brickR19C21 { grid-area: brickR19C21; }
+.brickR19C22 { grid-area: brickR19C22; }
+.brickR19C23 { grid-area: brickR19C23; }
+.brickR19C24 { grid-area: brickR19C24; }
+.brickR19C25 { grid-area: brickR19C25; }
+.brickR19C26 { grid-area: brickR19C26; }
+.brickR19C27 { grid-area: brickR19C27; }
+.brickR19C28 { grid-area: brickR19C28; }
+.brickR19C29 { grid-area: brickR19C29; }
+.brickR19C30 { grid-area: brickR19C30; }
+.brickR19C31 { grid-area: brickR19C31; }
+.brickR19C32 { grid-area: brickR19C32; }
+.brickR19C33 { grid-area: brickR19C33; }
+.brickR19C34 { grid-area: brickR19C34; }
+.brickR19C35 { grid-area: brickR19C35; }
+.brickR19C36 { grid-area: brickR19C36; }
+.brickR19C37 { grid-area: brickR19C37; }
+.brickR19C38 { grid-area: brickR19C38; }
+.brickR19C39 { grid-area: brickR19C39; }
+.brickR19C40 { grid-area: brickR19C40; }
+.brickR19C41 { grid-area: brickR19C41; }
+.brickR19C42 { grid-area: brickR19C42; }
+.brickR20C1 { grid-area: brickR20C1; }
+.brickR20C2 { grid-area: brickR20C2; }
+.brickR20C3 { grid-area: brickR20C3; }
+.brickR20C4 { grid-area: brickR20C4; }
+.brickR20C5 { grid-area: brickR20C5; }
+.brickR20C6 { grid-area: brickR20C6; }
+.brickR20C7 { grid-area: brickR20C7; }
+.brickR20C8 { grid-area: brickR20C8; }
+.brickR20C9 { grid-area: brickR20C9; }
+.brickR20C10 { grid-area: brickR20C10; }
+.brickR20C11 { grid-area: brickR20C11; }
+.brickR20C12 { grid-area: brickR20C12; }
+.brickR20C13 { grid-area: brickR20C13; }
+.brickR20C14 { grid-area: brickR20C14; }
+.brickR20C15 { grid-area: brickR20C15; }
+.brickR20C16 { grid-area: brickR20C16; }
+.brickR20C17 { grid-area: brickR20C17; }
+.brickR20C18 { grid-area: brickR20C18; }
+.brickR20C19 { grid-area: brickR20C19; }
+.brickR20C20 { grid-area: brickR20C20; }
+.brickR20C21 { grid-area: brickR20C21; }
+.brickR20C22 { grid-area: brickR20C22; }
+.brickR20C23 { grid-area: brickR20C23; }
+.brickR20C24 { grid-area: brickR20C24; }
+.brickR20C25 { grid-area: brickR20C25; }
+.brickR20C26 { grid-area: brickR20C26; }
+.brickR20C27 { grid-area: brickR20C27; }
+.brickR20C28 { grid-area: brickR20C28; }
+.brickR20C29 { grid-area: brickR20C29; }
+.brickR20C30 { grid-area: brickR20C30; }
+.brickR20C31 { grid-area: brickR20C31; }
+.brickR20C32 { grid-area: brickR20C32; }
+.brickR20C33 { grid-area: brickR20C33; }
+.brickR20C34 { grid-area: brickR20C34; }
+.brickR20C35 { grid-area: brickR20C35; }
+.brickR20C36 { grid-area: brickR20C36; }
+.brickR20C37 { grid-area: brickR20C37; }
+.brickR20C38 { grid-area: brickR20C38; }
+.brickR20C39 { grid-area: brickR20C39; }
+.brickR20C40 { grid-area: brickR20C40; }
+.brickR20C41 { grid-area: brickR20C41; }
+.brickR20C42 { grid-area: brickR20C42; }
+.brickR21C1 { grid-area: brickR21C1; }
+.brickR21C2 { grid-area: brickR21C2; }
+.brickR21C3 { grid-area: brickR21C3; }
+.brickR21C4 { grid-area: brickR21C4; }
+.brickR21C5 { grid-area: brickR21C5; }
+.brickR21C6 { grid-area: brickR21C6; }
+.brickR21C7 { grid-area: brickR21C7; }
+.brickR21C8 { grid-area: brickR21C8; }
+.brickR21C9 { grid-area: brickR21C9; }
+.brickR21C10 { grid-area: brickR21C10; }
+.brickR21C11 { grid-area: brickR21C11; }
+.brickR21C12 { grid-area: brickR21C12; }
+.brickR21C13 { grid-area: brickR21C13; }
+.brickR21C14 { grid-area: brickR21C14; }
+.brickR21C15 { grid-area: brickR21C15; }
+.brickR21C16 { grid-area: brickR21C16; }
+.brickR21C17 { grid-area: brickR21C17; }
+.brickR21C18 { grid-area: brickR21C18; }
+.brickR21C19 { grid-area: brickR21C19; }
+.brickR21C20 { grid-area: brickR21C20; }
+.brickR21C21 { grid-area: brickR21C21; }
+.brickR21C22 { grid-area: brickR21C22; }
+.brickR21C23 { grid-area: brickR21C23; }
+.brickR21C24 { grid-area: brickR21C24; }
+.brickR21C25 { grid-area: brickR21C25; }
+.brickR21C26 { grid-area: brickR21C26; }
+.brickR21C27 { grid-area: brickR21C27; }
+.brickR21C28 { grid-area: brickR21C28; }
+.brickR21C29 { grid-area: brickR21C29; }
+.brickR21C30 { grid-area: brickR21C30; }
+.brickR21C31 { grid-area: brickR21C31; }
+.brickR21C32 { grid-area: brickR21C32; }
+.brickR21C33 { grid-area: brickR21C33; }
+.brickR21C34 { grid-area: brickR21C34; }
+.brickR21C35 { grid-area: brickR21C35; }
+.brickR21C36 { grid-area: brickR21C36; }
+.brickR21C37 { grid-area: brickR21C37; }
+.brickR21C38 { grid-area: brickR21C38; }
+.brickR21C39 { grid-area: brickR21C39; }
+.brickR21C40 { grid-area: brickR21C40; }
+.brickR21C41 { grid-area: brickR21C41; }
+.brickR21C42 { grid-area: brickR21C42; }
+
+@media (max-aspect-ratio: 1/2) {
+  .parent {
+
+    width: 46vh;
+    height: 92vh;
+
+  }
+}
+
+/* Popup container */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+
+  /*position: relative;
+  float: center;
+  display: inline-block;
+  cursor: pointer;
+  */
+}
+
+#myPopup {
+  opacity: 1;
+  color: white;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  /*by changing this to visible it works every time but no animation - thoughts?*/
+  visibility: show;
+  max-width: 400px;
+  background-color: black;
+  opacity: 1;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}

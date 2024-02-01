@@ -1,0 +1,32 @@
+if($table === "a"){
+				$stmt = $conn->prepare("SELECT * FROM a_brick_group INNER JOIN allNames ON allNames.brickID = a_brick_group.brickID");
+				$stmt->execute();
+
+				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+				$result = $stmt->fetchAll();
+				for ($i=1; $i<379; $i++){
+					$testID = $i;
+					while(strlen($testID) < 3){
+						$testID = "0" + $testID;
+					}
+					$testID = "a" + $testID;
+
+					$finalAnswer = $conn->prepare("SELECT * FROM a_brick_group INNER JOIN allNames ON allNames.brickID = a_brick_group.brickID WHERE brickID = 
+					(SELECT brickID FROM a_brick_group WHERE id = 
+					(SELECT MIN(id) FROM a_brick_group WHERE gridTemplateAreasId = 
+					(SELECT gridTemplateAreasId FROM a_brick_group WHERE brickID = ?)))");
+					$finalAnswer->bindParam(1, $testID, PDO::PARAM_STR, 4);
+					$finalAnswer->execute();
+					$output = $finalAnswer->setFetchMode(PDO::FETCH_ASSOC);
+					$output = $finalAnswer->fetchAll();
+
+					for($j=0; $j<count($result['brickID']); $j++){
+						if($result['gridTemplateAreasId'][j] == $output['gridTemplateAreasId'][0]){
+							$result['brickID'][j] = $output['brickID'][0];
+						}
+					}
+					
+				}
+				
+				// $stmt = $conn->prepare("SELECT 'a' as source, nameTableID, brickID, firstName, lastName FROM allNames");
+			}

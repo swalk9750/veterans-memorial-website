@@ -1,0 +1,274 @@
+/*fix weird issue with 5*/
+
+.clear {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+img {
+  height: 88px;
+}
+
+.cool{
+  padding:0px;
+}
+
+.brickStyle {
+  border-width: 1px;
+  border-style: solid;
+  /* border-color: green; */
+  
+}
+
+/* 
+  brickgroupA: 21x18 rows: 14 Columns: 12
+  brickgroupB: 42x21 rows: 14 col: 28
+  brickgroupc: 21x18 same as a
+  brickgroupd&f: 24x18 rows 16 col: 12
+  brickgroupe: 24x42 rows 16 col: 28
+  brickgroupg: 90x12 rows: 8 col: 60
+  seperating: col 4 rows 4
+  col4: 8 col wide
+
+*/
+
+/* Row for formrly col 4  8 high*/
+.brickR1C1 { grid-area: 1/1/9/5; }
+.brickR1C2 { grid-area: 1/5/9/65; }
+.brickR1C7 { grid-area: 1/65/9/69; }
+
+/* skinny Row  4 high*/
+.brickR2C1 { grid-area: 9/1/13/5; }
+.brickR2C2 { grid-area: 9/5/13/17; }
+.brickR2C3 { grid-area: 9/17/13/21; }
+.brickR2C4 { grid-area: 9/21/13/49; }
+.brickR2C5 { grid-area: 9/49/13/53; }
+.brickR2C6 { grid-area: 9/53/13/65; }
+.brickR2C7 { grid-area: 9/65/13/69; }
+
+/* Row with boxes D, E, F 16 high*/
+.brickR3C1 { grid-area: 13/1/29/5; }
+.brickR3C2 { grid-area: 13/5/29/17; }
+.brickR3C3 { grid-area: 13/17/29/21; }
+.brickR3C4 { grid-area: 13/21/29/49; }
+.brickR3C5 { grid-area: 13/49/29/53; }
+.brickR3C6 { grid-area: 13/53/29/65; }
+.brickR3C7 { grid-area: 13/65/29/69; }
+
+
+/* skinny Row 4 high */
+.brickR4C1 { grid-area: 29/1/33/5; }
+.brickR4C2 { grid-area: 29/5/33/17; }
+.brickR4C3 { grid-area: 29/17/33/21; }
+.brickR4C4 { grid-area: 29/21/33/49; }
+.brickR4C5 { grid-area: 29/49/33/53; }
+.brickR4C6 { grid-area: 29/53/33/65; }
+.brickR4C7 { grid-area: 29/65/33/69; }
+
+/* Row with boxes A, B, C 14 high*/
+.brickR5C1 { grid-area: 33/1/47/5; }
+.brickR5C2 { grid-area: 33/5/47/17; }
+.brickR5C3 { grid-area: 33/17/47/21; }
+.brickR5C4 { grid-area: 33/21/47/49; }
+.brickR5C5 { grid-area: 33/49/47/53; }
+.brickR5C6 { grid-area: 33/53/47/65; }
+.brickR5C7 { grid-area: 33/65/47/69; }
+
+
+/* Bottom skinny Row 4 high */
+.brickR6C1 { grid-area: 47/1/51/5; }
+.brickR6C2 { grid-area: 47/5/51/17; }
+.brickR6C3 { grid-area: 47/17/51/21; }
+.brickR6C4 { grid-area: 47/21/51/49; }
+.brickR6C5 { grid-area: 47/49/51/53; }
+.brickR6C6 { grid-area: 47/53/51/65; }
+.brickR6C7 { grid-area: 47/65/51/69; }
+
+.mainBody{
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 80vh;
+}
+
+.wrapper {
+  --frame-max-height: 40rem;
+  --frame-ratio-w: 68;
+  --frame-ratio-h: 50; /*25*/
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: var(--frame-max-height);
+  margin: 0 auto;
+}
+
+.bodyFrame {
+    /* Padding is width/height, since % padding is based off the element's width */
+    --ratio: calc(var(--frame-ratio-h, 1) / var(--frame-ratio-w, 1) * 100%);
+    /**
+     * The height of the frame is either the calculated padding value, or a maximum
+     * passed in (using --frame-max-height). This effectively clamps the height.
+     */
+    --frame-height: min(var(--ratio), var(--frame-max-height));
+    position: relative;
+    padding-bottom: var(--frame-height);
+    /** 
+     * The width should be 100% where possible, but should maintain aspect ratio
+     * first and foremost. In order to do so we can take the calculated height
+     * and reverse engineer the width.
+     */
+    width: min(calc(var(--frame-height, 0) * (var(--frame-ratio-w) / var(--frame-ratio-h))), 100%);
+    height: 0;
+    
+    /**
+     * Irrelevant
+     */
+    background-color: blue;
+    margin: 0 auto;
+}
+
+
+
+.search-bar-drop-down{
+  position:
+  relative;
+  padding-right: 100px;
+  display: inline-block;
+}
+
+.dropDownMenuItem{
+  display: block;
+  position: absolute;
+  /* min-width: 160px; */
+  z-index: 1;
+  background-color:white;
+}
+
+.searchBarItemThing:hover{
+  background-color:darkgrey;
+  color: purple;
+}
+
+.dropDownTextColor{
+  color:goldenrod;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 0px;
+}
+.mainCol {
+  /*padding-left:25%;
+  padding-right:25%;*/
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(68, 1fr);
+  grid-template-rows: repeat(50, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  position: absolute;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 3%; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  height: 92vh;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #searchBar {
+    width: 75%;
+    margin-right: 5px;
+  }
+
+  img {
+    height: 58px;
+  }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+  img {
+    height: 58px;
+  }
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe(0 100% 0%);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    height: 700px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+
+  img {
+    height:60px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  img {
+    height: 60px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  img {
+    height: 60px;
+  }
+}
